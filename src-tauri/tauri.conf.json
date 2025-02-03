@@ -1,16 +1,15 @@
 {
-  "$schema": "https://schema.tauri.app/config/2.0.0",
+  "$schema": "https://schema.tauri.app/config/2",
   "productName": "cozycoder",
   "version": "0.1.0",
-  "identifier": "app.cozycoder",
+  "identifier": "dev.cozycoder",
   "build": {
-    "frontendDist": "../",
-    "beforeBuildCommand": "gleam run -m lustre/dev build",
-    "beforeDevCommand": "gleam run -m lustre/dev start",
-    "devUrl": "http://localhost:1234"
+    "beforeDevCommand": "deno task dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "deno task build",
+    "frontendDist": "../dist"
   },
   "app": {
-    "withGlobalTauri": true,
     "windows": [
       {
         "title": "cozycoder",
