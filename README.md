@@ -4,22 +4,24 @@ Your cozy space for coding with AI.
 
 ## Prerequisites
 
-* Elixir 1.17
-* Erlang 27
-* Docker compose
+- Elixir 1.17
+- Erlang 27
+- Docker compose
 
 ### Installation
 
-* Docker compose: [Install Docker Desktop](https://www.docker.com/products/docker-desktop/)
-* Elixir and Erlang:
-  * Recommended: Use [`mise`](https://mise.jdx.dev) with the provided
+- Docker compose:
+  [Install Docker Desktop](https://www.docker.com/products/docker-desktop/)
+- Elixir and Erlang:
+  - Recommended: Use [`mise`](https://mise.jdx.dev) with the provided
     `.mise.toml` file:
 
     ```sh
     mise install
     ```
 
-  * Alternatively, follow the [official Elixir installation guide](https://elixir-lang.org/install.html)
+  - Alternatively, follow the
+    [official Elixir installation guide](https://elixir-lang.org/install.html)
 
 ## Usage
 
