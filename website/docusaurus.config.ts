@@ -137,6 +137,8 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
   } satisfies Preset.ThemeConfig,
+
+  scripts: [{ src: 'https://plausible.io/js/script.js', defer: true, 'data-domain': 'cozycoder.app' }],
 };
 
 export default config;
