@@ -1,0 +1,3 @@
+[submodule "website/themes/cozydoks"]
+	path = website/themes/cozydoks
+	url = https://github.com/jehrhardt/cozydoks.git
