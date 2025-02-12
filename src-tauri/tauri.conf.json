@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "identifier": "app.cozycoder",
   "build": {
-    "beforeDevCommand": "npm run dev",
+    "beforeDevCommand": "deno run dev",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "npm run build",
+    "beforeBuildCommand": "deno run build",
     "frontendDist": "../dist"
   },
   "app": {
