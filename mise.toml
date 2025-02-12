@@ -1,4 +1,4 @@
 [tools]
 "cargo:tauri-cli" = "2"
-node = "lts"
+deno = "2"
 rust = "stable"
