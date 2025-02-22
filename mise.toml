@@ -1,4 +1,0 @@
-[tools]
-"cargo:tauri-cli" = "2"
-deno = "2"
-rust = "stable"
