@@ -4,14 +4,12 @@ Your cozy space for coding with AI.
 
 ## Prerequisites
 
-- Rust
-- deno
-- Tauri CLI
-- [Native dependencies of Tauri](https://tauri.app/start/prerequisites/#system-dependencies)
+- Erlang 27 or above
+- Elixir 1.18 or above
 
 ### Installation
 
-**Recommended:** Use [`mise`](https://mise.jdx.dev) with the provided `mise.toml` file:
+**Recommended:** Use [`mise`](https://mise.jdx.dev) or [asdf](https://asdf-vm.com):
 
 ```sh
 mise install
@@ -19,14 +17,16 @@ mise install
 
 ## Usage
 
-1. Install front-end dependencies:
+1. Setup project and dependencies:
 
    ```sh
-   deno install
+   mix setup
    ```
 
 2. Start the application:
 
    ```sh
-   cargo tauri dev
+   mix phx.server
    ```
+
+   Open the application in your browser under [localhost:4000](http://localhost:4000).
