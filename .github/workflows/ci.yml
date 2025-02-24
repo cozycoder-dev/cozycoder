@@ -6,30 +6,52 @@ on:
   pull_request:
     branches: ["main"]
 
-permissions:
-  contents: read
-
 jobs:
-  build:
+  test:
     name: Test
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Elixir
-        uses: erlef/setup-beam@v1.18.2
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: denoland/setup-deno@v2
         with:
-          version-file: ".tool-versions"
-          version-type: strict
-      - name: Restore dependencies cache
-        uses: actions/cache@v4
+          deno-version: v2.x
+      - name: Install frontend dependencies
+        run: deno install
+
+  build-desktop:
+    name: Build desktop
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "macos-latest"
+            args: "--target aarch64-apple-darwin"
+          - platform: "macos-latest"
+            args: "--target x86_64-apple-darwin"
+          - platform: "ubuntu-latest"
+            args: ""
+          - platform: "windows-latest"
+            args: ""
+
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Install Tauri CLI
+        run: cargo install tauri-cli
+      - uses: denoland/setup-deno@v2
         with:
-          path: deps
-          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: ${{ runner.os }}-mix-
-      - name: Install dependencies
-        run: mix deps.get
-      - name: Check formatting
-        run: mix format --check-formatted
-      - name: Run tests
-        run: mix test
+          deno-version: v2.x
+      - name: Install frontend dependencies
+        run: deno install
+      - name: install dependencies (ubuntu only)
+        if: matrix.platform == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+      - name: Build app
+        run: cargo tauri build
