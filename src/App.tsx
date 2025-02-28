@@ -1,43 +1,75 @@
-import { createResource, createSignal, Match, Show, Switch } from "solid-js";
-import { invoke } from "@tauri-apps/api/core";
+import {
+  createResource,
+  createSignal,
+  For,
+  Match,
+  Show,
+  Switch,
+} from "solid-js";
+import { fetchChatHistory, sendMessage } from "./actions";
 import "./App.css";
 
 function App() {
-  async function sendMsg(userMsg: string): Promise<string> {
-    return await invoke("prompt", { userMsg });
-  }
+  const [inputValue, setInputValue] = createSignal("");
+  const [history, { mutate }] = createResource(fetchChatHistory, {
+    initialValue: [],
+  });
 
-  const [input, setInput] = createSignal<HTMLInputElement>();
-  const [userMsg, setUserMsg] = createSignal("");
-  const [assistantMsg] = createResource(userMsg, sendMsg)
+  const handleSendMessage = async () => {
+    const content = inputValue();
+    mutate((messages) => [...messages, { role: "user", content }]);
+    const assistantMessage = await sendMessage(content);
+    mutate((messages) => [
+      ...messages,
+      { role: "assistant", content: assistantMessage },
+    ]);
+  };
+
+  const handleKeyPress = (e: KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
 
   return (
     <main class="container">
-      <p>User: {userMsg()}</p>
-      <Show when={assistantMsg.loading}>
-        <p>Loading...</p>
-      </Show>
-      <Switch>
-        <Match when={assistantMsg.error}>
-          <span>Error: {assistantMsg.error}</span>
-        </Match>
-        <Match when={assistantMsg()}>
-          <p>Assistant: {assistantMsg()}</p>
-        </Match>
-      </Switch>
+      <div class="chat-container">
+        {/* Chat history display */}
+        <div class="messages-container">
+          <Show when={history.loading}>
+            <p>Loading...</p>
+          </Show>
+          <Switch>
+            <Match when={history.error}>
+              <span>Error: {history.error}</span>
+            </Match>
+            <Match when={history()}>
+              <For each={history()}>
+                {(message) => (
+                  <div class={`message ${message.role}`}>
+                    <div class="message-header">
+                      {message.role === "user" ? "User" : "Assistant"}
+                    </div>
+                    <div class="message-content">{message.content}</div>
+                  </div>
+                )}
+              </For>
+            </Match>
+          </Switch>
+        </div>
 
-      <input
-        id="chat-input"
-        ref={setInput}
-        placeholder="Enter a message..."
-      />
-      <button
-        onClick={() => {
-          setUserMsg(input()?.value ?? "");
-        }}
-      >
-        Send
-      </button>
+        <div class="input-container">
+          <input
+            id="chat-input"
+            value={inputValue()}
+            onInput={(e) => setInputValue(e.target.value)}
+            onKeyPress={handleKeyPress}
+            placeholder="Type your message..."
+          />
+          <button onClick={handleSendMessage}>Send</button>
+        </div>
+      </div>
     </main>
   );
 }
