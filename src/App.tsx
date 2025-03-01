@@ -1,7 +1,8 @@
 import ChatList from "./components/ChatList";
 import "./App.css";
+import { ParentProps } from "solid-js";
 
-function App(props) {
+function App(props: ParentProps) {
   return (
     <main class="h-screen flex">
       {/* Sidebar */}
