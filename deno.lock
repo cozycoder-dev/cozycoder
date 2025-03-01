@@ -1,6 +1,7 @@
 {
   "version": "4",
   "specifiers": {
+    "npm:@solidjs/router@~0.15.3": "0.15.3_solid-js@1.9.4__seroval@1.2.0",
     "npm:@tailwindcss/vite@^4.0.9": "4.0.9_vite@6.0.11_lightningcss@1.29.1",
     "npm:@tauri-apps/api@2": "2.2.0",
     "npm:@tauri-apps/plugin-opener@2": "2.2.5",
@@ -305,6 +306,12 @@
     },
     "@rollup/rollup-win32-x64-msvc@4.32.0": {
       "integrity": "sha512-5hqO5S3PTEO2E5VjCePxv40gIgyS2KvO7E7/vvC/NbIW4SIRamkMr1hqj+5Y67fbBWv/bQLB6KelBQmXlyCjWA=="
+    },
+    "@solidjs/router@0.15.3_solid-js@1.9.4__seroval@1.2.0": {
+      "integrity": "sha512-iEbW8UKok2Oio7o6Y4VTzLj+KFCmQPGEpm1fS3xixwFBdclFVBvaQVeibl1jys4cujfAK5Kn6+uG2uBm3lxOMw==",
+      "dependencies": [
+        "solid-js"
+      ]
     },
     "@tailwindcss/node@4.0.9": {
       "integrity": "sha512-tOJvdI7XfJbARYhxX+0RArAhmuDcczTC46DGCEziqxzzbIaPnfYaIyRT31n4u8lROrsO7Q6u/K9bmQHL2uL1bQ==",
@@ -743,6 +750,7 @@
   "workspace": {
     "packageJson": {
       "dependencies": [
+        "npm:@solidjs/router@~0.15.3",
         "npm:@tailwindcss/vite@^4.0.9",
         "npm:@tauri-apps/api@2",
         "npm:@tauri-apps/plugin-opener@2",
