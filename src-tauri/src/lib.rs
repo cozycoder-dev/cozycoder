@@ -7,17 +7,25 @@ use uuid::Uuid;
 
 #[derive(Serialize, Deserialize, Clone)]
 struct Chat {
-    id: Uuid,
+    id: Option<Uuid>,
     title: String,
     history: Vec<Message>,
-    created_at: DateTime<Utc>,
-    updated_at: DateTime<Utc>,
+    created_at: Option<DateTime<Utc>>,
+    updated_at: Option<DateTime<Utc>>,
+}
+
+#[derive(Serialize, Deserialize, Clone)]
+#[serde(rename_all = "lowercase")]
+enum Role {
+    User,
+    Assistant,
 }
 
 #[derive(Serialize, Deserialize, Clone)]
 struct Message {
-    role: String,    // "user" or "assistant"
-    content: String, // The message content
+    role: Role,
+    content: String,
+    created_at: Option<DateTime<Utc>>,
 }
 
 static CHATS: LazyLock<Mutex<HashMap<Uuid, Chat>>> = LazyLock::new(|| Mutex::new(HashMap::new()));
@@ -25,80 +33,97 @@ static CHATS: LazyLock<Mutex<HashMap<Uuid, Chat>>> = LazyLock::new(|| Mutex::new
 fn initialize_dummy_data() {
     let history = vec![
         Message {
-            role: "user".to_string(),
+            role: Role::User,
             content: "Hello".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "assistant".to_string(),
+            role: Role::Assistant,
             content: "Hi there!".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "user".to_string(),
+            role: Role::User,
             content: "How are you?".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "assistant".to_string(),
+            role: Role::Assistant,
             content: "I'm good, thanks!".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "user".to_string(),
+            role: Role::User,
             content: "What's your name?".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "assistant".to_string(),
+            role: Role::Assistant,
             content: "I'm a chatbot!".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "user".to_string(),
+            role: Role::User,
             content: "Can you help me?".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "assistant".to_string(),
+            role: Role::Assistant,
             content: "Sure, what do you need help with?".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "user".to_string(),
+            role: Role::User,
             content: "What's the weather like today?".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "assistant".to_string(),
+            role: Role::Assistant,
             content: "I'm sorry, I don't have access to real-time weather data.".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "user".to_string(),
+            role: Role::User,
             content: "What's the capital of France?".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "assistant".to_string(),
+            role: Role::Assistant,
             content: "The capital of France is Paris.".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "user".to_string(),
+            role: Role::User,
             content: "What's the capital of Germany?".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "assistant".to_string(),
+            role: Role::Assistant,
             content: "The capital of Germany is Berlin.".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "user".to_string(),
+            role: Role::User,
             content: "What's the capital of Italy?".to_string(),
+            created_at: Some(Utc::now()),
         },
         Message {
-            role: "assistant".to_string(),
+            role: Role::Assistant,
             content: "The capital of Italy is Rome.".to_string(),
+            created_at: Some(Utc::now()),
         },
     ];
     let mut chats = CHATS.lock().unwrap();
-    let id = Uuid::new_v4();
+    let id = Some(Uuid::new_v4());
+    let now = Some(Utc::now());
     chats.insert(
-        id,
+        id.unwrap(),
         Chat {
             id,
             title: "foo".to_string(),
             history,
-            created_at: Utc::now(),
-            updated_at: Utc::now(),
+            created_at: now,
+            updated_at: now,
         },
     );
 }
@@ -112,7 +137,7 @@ fn fetch_chats() -> Vec<Chat> {
 #[tauri::command]
 fn create_chat(mut chat: Chat) -> Chat {
     let id = Uuid::new_v4();
-    chat.id = id;
+    chat.id = Some(id);
     let mut chats = CHATS.lock().unwrap();
     chats.insert(id, chat.clone());
     chat
@@ -139,8 +164,9 @@ fn update_chat_title(chat_id: Uuid, title: String) -> bool {
 fn send_message(chat_id: Uuid, user_msg: &str) -> String {
     // Store user message in history
     let user_message = Message {
-        role: "user".to_string(),
+        role: Role::User,
         content: user_msg.to_string(),
+        created_at: Some(Utc::now()),
     };
 
     // Create a dummy response
@@ -151,8 +177,9 @@ fn send_message(chat_id: Uuid, user_msg: &str) -> String {
 
     // Store assistant message in history
     let assistant_message = Message {
-        role: "assistant".to_string(),
+        role: Role::Assistant,
         content: response.clone(),
+        created_at: Some(Utc::now()),
     };
 
     // Add both messages to history

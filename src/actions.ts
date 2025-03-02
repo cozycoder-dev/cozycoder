@@ -9,15 +9,18 @@ export interface Chat {
 
 export interface Message {
   id: string;
-  chatId: string;
   role: "user" | "assistant";
   content: string;
-  timestamp: string;
+  createdAt: string;
 }
 
-export async function createChat(title: string = "New Chat"): Promise<string> {
+export async function createChat(title: string): Promise<string> {
+  const history: Message[] = [];
   const result: Chat = await invoke("create_chat", {
-    title,
+    chat: {
+      title,
+      history,
+    },
   });
   return result.id;
 }
