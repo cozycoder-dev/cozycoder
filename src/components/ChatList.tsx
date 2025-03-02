@@ -12,7 +12,7 @@ export default function ChatList() {
   const handleNewChat = async () => {
     setIsCreating(true);
     try {
-      const chatId = await createChat();
+      const chatId = await createChat("New Chat");
       await refetch();
       navigate(`/chats/${chatId}`);
     } catch (error) {
@@ -25,7 +25,7 @@ export default function ChatList() {
   const handleDeleteChat = async (chatId: string, e: Event) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (confirm("Are you sure you want to delete this chat?")) {
       await deleteChat(chatId);
       mutate((prev) => prev.filter((chat) => chat.id !== chatId));
@@ -64,7 +64,7 @@ export default function ChatList() {
           {(chat) => (
             <A
               href={`/chats/${chat.id}`}
-              class="block p-3 mb-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 
+              class="block p-3 mb-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700
                     text-gray-800 dark:text-gray-200 transition-colors
                     flex justify-between items-center"
               activeClass="bg-gray-200 dark:bg-gray-700"

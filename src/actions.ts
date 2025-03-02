@@ -27,7 +27,7 @@ export async function createChat(title: string): Promise<string> {
 
 export async function fetchChats(): Promise<Chat[]> {
   try {
-    return await invoke("get_chats");
+    return await invoke("fetch_chats");
   } catch (error) {
     console.error("Failed to fetch chats:", error);
     return [];
