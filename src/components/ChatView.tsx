@@ -1,6 +1,5 @@
 import {
   createResource,
-  createSignal,
   For,
   Match,
   Show,
@@ -10,31 +9,36 @@ import { useParams } from "@solidjs/router";
 import { fetchChatHistory, sendMessage } from "../api/messages";
 import { updateChatTitle } from "../api/chats";
 import Message from "./Message";
+import MessageInput from "./MessageInput";
 
 export default function ChatView() {
   const params = useParams();
-  const [inputValue, setInputValue] = createSignal("");
   const [history, { mutate, refetch }] = createResource(
     () => params.id,
     fetchChatHistory,
     { initialValue: [] }
   );
-  const handleSendMessage = async () => {
-    const content = inputValue();
-    if (!content.trim()) return;
-    setInputValue("");
+
+  const handleSendMessage = async (content: string) => {
     const createdAt = new Date().toISOString();
+
+    // Optimistically add user message
     mutate((messages) => [...messages, {
       id: `temp-${createdAt}`,
       role: "user",
       content,
       createdAt
     }]);
+
     try {
       const assistantMessage = await sendMessage(params.id, content);
+
+      // Update title if this is the first message
       if (history().length === 0) {
         updateChatTitle(params.id, content.slice(0, 30) + (content.length > 30 ? "..." : ""));
       }
+
+      // Add assistant response
       mutate((messages) => [
         ...messages,
         {
@@ -47,13 +51,6 @@ export default function ChatView() {
     } catch (error) {
       console.error("Failed to send message:", error);
       await refetch(); // Revert to server state on error
-    }
-  };
-
-  const handleKeyPress = (e: KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
     }
   };
 
@@ -86,26 +83,11 @@ export default function ChatView() {
           </Switch>
         </div>
 
-        <div class="flex p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 gap-2.5">
-          <input
-            id="chat-input"
-            value={inputValue()}
-            onInput={(e) => setInputValue(e.currentTarget.value)}
-            onKeyPress={handleKeyPress}
+        <div class="p-4 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
+          <MessageInput
+            onSubmit={handleSendMessage}
             placeholder="Type your message..."
-            class="flex-1 p-3 border border-gray-300 dark:border-gray-600 rounded text-base
-                   bg-white dark:bg-gray-800 text-gray-900 dark:text-white
-                   focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <button
-            onClick={handleSendMessage}
-            disabled={!inputValue().trim()}
-            class="px-5 bg-blue-600 text-white rounded text-base transition-colors
-                   hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-                   disabled:bg-gray-400 disabled:cursor-not-allowed"
-          >
-            Send
-          </button>
         </div>
       </div>
     </div>
