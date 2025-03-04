@@ -1,8 +1,13 @@
+import { onMount } from "solid-js";
 import ChatList from "./components/ChatList";
+import { refetchChats } from "./store/chatStore";
 import "./App.css";
 import { ParentProps } from "solid-js";
 
 function App(props: ParentProps) {
+  onMount(() => {
+    refetchChats();
+  });
   return (
     <main class="h-screen flex">
       {/* Sidebar */}

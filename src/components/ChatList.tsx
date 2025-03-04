@@ -1,19 +1,15 @@
 import { createResource, createSignal, For, Show } from "solid-js";
 import { A, useNavigate } from "@solidjs/router";
-import { fetchChats, createChat, deleteChat } from "../actions";
+import { useChatStore, createChat, deleteChat } from "../store/chatStore";
 
 export default function ChatList() {
-  const [chats, { mutate, refetch }] = createResource(fetchChats, {
-    initialValue: [],
-  });
+  const { chats, isLoading, error } = useChatStore();
   const navigate = useNavigate();
   const [isCreating, setIsCreating] = createSignal(false);
-
   const handleNewChat = async () => {
     setIsCreating(true);
     try {
-      const chatId = await createChat("New Chat");
-      await refetch();
+      const chatId = await createChat();
       navigate(`/chats/${chatId}`);
     } catch (error) {
       console.error("Failed to create chat:", error);
@@ -21,18 +17,15 @@ export default function ChatList() {
       setIsCreating(false);
     }
   };
-
   const handleDeleteChat = async (chatId: string, e: Event) => {
     e.preventDefault();
     e.stopPropagation();
 
     if (confirm("Are you sure you want to delete this chat?")) {
       await deleteChat(chatId);
-      mutate((prev) => prev.filter((chat) => chat.id !== chatId));
       navigate("/");
     }
   };
-
   return (
     <div class="flex flex-col h-full">
       <div class="p-4 border-b border-gray-200 dark:border-gray-700">
@@ -48,7 +41,7 @@ export default function ChatList() {
       </div>
 
       <div class="flex-1 overflow-y-auto p-2">
-        <Show when={chats.loading}>
+        <Show when={isLoading()}>
           <p class="text-center py-2">
             <span class="loading-dot">.</span>
             <span class="loading-dot">.</span>
@@ -56,11 +49,11 @@ export default function ChatList() {
           </p>
         </Show>
 
-        <Show when={chats.error}>
+        <Show when={error()}>
           <p class="text-red-500 text-center py-2">Error loading chats</p>
         </Show>
 
-        <For each={chats()}>
+        <For each={chats}>
           {(chat) => (
             <A
               href={`/chats/${chat.id}`}
@@ -94,7 +87,7 @@ export default function ChatList() {
           )}
         </For>
 
-        <Show when={!chats.loading && chats().length === 0}>
+        <Show when={!isLoading() && chats.length === 0}>
           <p class="text-center text-gray-500 dark:text-gray-400 py-4">
             No chats yet
           </p>

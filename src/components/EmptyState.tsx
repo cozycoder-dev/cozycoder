@@ -1,6 +1,7 @@
 import { createSignal } from "solid-js";
 import { useNavigate } from "@solidjs/router";
-import { createChat, sendMessage } from "../actions";
+import { createChat } from "../store/chatStore";
+import { sendMessage } from "../actions";
 
 export default function EmptyState() {
   const [inputValue, setInputValue] = createSignal("");
@@ -13,15 +14,8 @@ export default function EmptyState() {
 
     setIsCreating(true);
     try {
-      // Create a new chat with first message content as title
-      const chatId = await createChat(
-        content.slice(0, 30) + (content.length > 30 ? "..." : ""),
-      );
-
-      // Send the first message
+      const chatId = await createChat(content.slice(0, 30) + (content.length > 30 ? "..." : ""));
       await sendMessage(chatId, content);
-
-      // Navigate to the new chat
       navigate(`/chats/${chatId}`);
     } catch (error) {
       console.error("Failed to create chat:", error);

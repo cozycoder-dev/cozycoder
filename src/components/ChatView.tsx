@@ -17,40 +17,29 @@ export default function ChatView() {
     fetchChatHistory,
     { initialValue: [] }
   );
-
   const handleSendMessage = async () => {
     const content = inputValue();
     if (!content.trim()) return;
-    
     setInputValue("");
-    
-    // Optimistically update UI
-    const timestamp = new Date().toISOString();
-    mutate((messages) => [...messages, { 
-      id: `temp-${timestamp}`,
-      chatId: params.id,
-      role: "user", 
+    const createdAt = new Date().toISOString();
+    mutate((messages) => [...messages, {
+      id: `temp-${createdAt}`,
+      role: "user",
       content,
-      timestamp
+      createdAt
     }]);
-    
     try {
       const assistantMessage = await sendMessage(params.id, content);
-      
-      // Handle first message special case (update chat title)
       if (history().length === 0) {
         updateChatTitle(params.id, content.slice(0, 30) + (content.length > 30 ? "..." : ""));
       }
-      
-      // Add assistant's response
       mutate((messages) => [
         ...messages,
-        { 
-          id: `assistant-${timestamp}`,
-          chatId: params.id,
-          role: "assistant", 
+        {
+          id: `assistant-${createdAt}`,
+          role: "assistant",
           content: assistantMessage,
-          timestamp: new Date().toISOString()
+          createdAt: new Date().toISOString()
         },
       ]);
     } catch (error) {
@@ -89,11 +78,10 @@ export default function ChatView() {
               <For each={history()}>
                 {(message) => (
                   <div
-                    class={`animate-fade-in px-4 py-3 rounded-lg max-w-[80%] ${
-                      message.role === "user"
-                        ? "self-end bg-blue-600 text-white"
-                        : "self-start bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-                    }`}
+                    class={`animate-fade-in px-4 py-3 rounded-lg max-w-[80%] ${message.role === "user"
+                      ? "self-end bg-blue-600 text-white"
+                      : "self-start bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200"
+                      }`}
                   >
                     <div class="font-bold mb-1 text-xs uppercase">
                       {message.role === "user" ? "User" : "Assistant"}
