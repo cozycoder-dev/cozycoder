@@ -7,7 +7,8 @@ import {
   Switch,
 } from "solid-js";
 import { useParams } from "@solidjs/router";
-import { fetchChatHistory, sendMessage, updateChatTitle } from "../actions";
+import { fetchChatHistory, sendMessage } from "../api/messages";
+import { updateChatTitle } from "../api/chats";
 
 export default function ChatView() {
   const params = useParams();

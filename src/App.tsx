@@ -1,6 +1,6 @@
 import { onMount } from "solid-js";
 import ChatList from "./components/ChatList";
-import { refetchChats } from "./store/chatStore";
+import { refetchChats } from "./api/chats";
 import "./App.css";
 import { ParentProps } from "solid-js";
 

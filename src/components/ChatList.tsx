@@ -1,9 +1,9 @@
-import { createResource, createSignal, For, Show } from "solid-js";
+import { createSignal, For, Show } from "solid-js";
 import { A, useNavigate } from "@solidjs/router";
-import { useChatStore, createChat, deleteChat } from "../store/chatStore";
+import { createChat, deleteChat, getChats } from "../api/chats";
 
 export default function ChatList() {
-  const { chats, isLoading, error } = useChatStore();
+  const { chats, isLoading, error } = getChats();
   const navigate = useNavigate();
   const [isCreating, setIsCreating] = createSignal(false);
   const handleNewChat = async () => {

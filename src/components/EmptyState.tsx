@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import { useNavigate } from "@solidjs/router";
-import { createChat } from "../store/chatStore";
-import { sendMessage } from "../actions";
+import { createChat } from "../api/chats";
+import { sendMessage } from "../api/messages";
 
 export default function EmptyState() {
   const [inputValue, setInputValue] = createSignal("");
