@@ -4,12 +4,13 @@
   "version": "0.1.0",
   "identifier": "app.cozycoder",
   "build": {
-    "beforeDevCommand": "deno run dev",
+    "beforeDevCommand": "trunk serve",
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "deno run build",
+    "beforeBuildCommand": "trunk build",
     "frontendDist": "../dist"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "title": "cozycoder",
