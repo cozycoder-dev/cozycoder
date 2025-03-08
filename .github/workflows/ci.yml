@@ -14,11 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
-      - uses: denoland/setup-deno@v2
+      - uses: actions/setup-node@v4
         with:
-          deno-version: v2.x
+          node-version: "lts/*"
+          cache: "npm"
       - name: Install frontend dependencies
-        run: deno install
+        run: npm ci
 
   build-desktop:
     name: Build desktop
@@ -43,11 +44,12 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - name: Install Tauri CLI
         run: cargo install tauri-cli
-      - uses: denoland/setup-deno@v2
+      - uses: actions/setup-node@v4
         with:
-          deno-version: v2.x
+          node-version: "lts/*"
+          cache: "npm"
       - name: Install frontend dependencies
-        run: deno install
+        run: npm ci
       - name: install dependencies (ubuntu only)
         if: matrix.platform == 'ubuntu-latest'
         run: |
