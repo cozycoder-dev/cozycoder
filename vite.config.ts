@@ -30,4 +30,25 @@ export default defineConfig(async () => ({
       ignored: ["**/src-tauri/**"],
     },
   },
+
+  // Configure Vitest
+  test: {
+    globals: true,
+    environment: "jsdom",
+    transformMode: {
+      web: [/\.[jt]sx?$/],
+    },
+    // solid uses jsx as its file extension
+    include: ["src/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
+    deps: {
+      // Put solid as external as we'll be manually handling how solid is initialized in the test env
+      external: ["solid-js", "@solidjs/router"],
+    },
+    // Configure jsdom
+    environmentOptions: {
+      jsdom: {
+        url: "http://localhost",
+      },
+    },
+  },
 }));
