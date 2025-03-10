@@ -14,6 +14,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
+    "types": ["@testing-library/jest-dom"],
 
     /* Linting */
     "strict": true,
