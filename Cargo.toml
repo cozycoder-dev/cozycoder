@@ -4,4 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-gpui = { git = "https://github.com/zed-industries/zed" }
+tokio = { version = "^1.44.0", features = ["full"] }
+axum = "^0.8.1"
+minijinja = { version = "^2.8.0", features = ["loader"] }

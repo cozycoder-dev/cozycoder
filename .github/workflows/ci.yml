@@ -16,10 +16,6 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
-      - name: Install Ubuntu dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libxkbcommon-x11-dev
       - name: Check formatting
         run: cargo fmt -- --check
       - name: Linting
@@ -27,29 +23,20 @@ jobs:
       - name: Run tests
         run: cargo test
 
-  build-desktop:
-    name: Build desktop
-
+  build:
+    name: Build ${{ matrix.runner }}
+    runs-on: ${{ matrix.runner }}
     strategy:
-      fail-fast: false
       matrix:
-        include:
-          - platform: "macos-latest"
-            args: "--target aarch64-apple-darwin"
-          - platform: "macos-latest"
-            args: "--target x86_64-apple-darwin"
-          - platform: "ubuntu-latest"
-            args: ""
-
-    runs-on: ${{ matrix.platform }}
+        runner: [ubuntu-latest, ubuntu-24.04-arm]
 
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-      - name: Install Ubuntu dependencies
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libxkbcommon-x11-dev
-      - name: Build app
-        run: cargo build --release
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: cozycoder:latest

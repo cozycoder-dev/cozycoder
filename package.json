@@ -1,0 +1,11 @@
+{
+  "name": "cozycoder",
+  "version": "0.1.0",
+  "description": "Your cozy space for coding with AI.",
+  "private": true,
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.13",
+    "htmx.org": "^1.9.12",
+    "tailwindcss": "^4.0.13"
+  }
+}
