@@ -4,13 +4,19 @@ Your cozy space for coding with AI.
 
 ## Prerequisites
 
-- Rust (stable)
-- Native dependencies of gpui:
-  - [Linux](https://github.com/zed-industries/zed/blob/main/docs/src/development/linux.md#dependencies)
-  - [macOS](https://github.com/zed-industries/zed/blob/main/docs/src/development/macos.md#dependencies)
+- [mise](https://mise.jdx.dev)
 
 ## Usage
 
-```sh
-cargo run
+Setup local environment:
+
+```bash
+mise install
+mise run setup
+```
+
+Run application in development mode:
+
+```bash
+mise run dev
 ```

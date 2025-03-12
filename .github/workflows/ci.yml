@@ -16,10 +16,6 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
-      - name: Install Ubuntu dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libxkbcommon-x11-dev
       - name: Check formatting
         run: cargo fmt -- --check
       - name: Linting
@@ -27,29 +23,18 @@ jobs:
       - name: Run tests
         run: cargo test
 
-  build-desktop:
-    name: Build desktop
-
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: "macos-latest"
-            args: "--target aarch64-apple-darwin"
-          - platform: "macos-latest"
-            args: "--target x86_64-apple-darwin"
-          - platform: "ubuntu-latest"
-            args: ""
-
-    runs-on: ${{ matrix.platform }}
+  build:
+    name: Build
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+      - uses: jdx/mise-action@v2
       - uses: dtolnay/rust-toolchain@stable
-      - name: Install Ubuntu dependencies
-        if: matrix.platform == 'ubuntu-latest'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libxkbcommon-x11-dev
-      - name: Build app
-        run: cargo build --release
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/*"
+      - name: Install front-end dependencies
+        run: npm ci
+      - name: Build
+        run: mise run build:release
