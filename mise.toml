@@ -10,3 +10,11 @@ dir = "{{ cwd }}/crates/app"
 [tasks."dev:daemon"]
 run = "cargo run"
 dir = "{{ cwd }}/crates/daemon"
+
+[tasks."fmt:leptos"]
+run = "leptosfmt ."
+dir = "{{ cwd }}/crates/app"
+
+[tasks.fmt]
+depends = ["fmt:leptos"]
+run = "cargo fmt"
