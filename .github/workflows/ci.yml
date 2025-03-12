@@ -24,17 +24,19 @@ jobs:
         run: cargo test
 
   build:
-    name: Build
-    runs-on: ubuntu-latest
+    name: Build ${{ matrix.runner }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        runner: [ubuntu-latest, ubuntu-24.04-arm]
 
     steps:
       - uses: actions/checkout@v4
-      - uses: jdx/mise-action@v2
-      - uses: dtolnay/rust-toolchain@stable
-      - uses: actions/setup-node@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build Docker image
+        uses: docker/build-push-action@v5
         with:
-          node-version: "lts/*"
-      - name: Install front-end dependencies
-        run: npm ci
-      - name: Build
-        run: mise run build:release
+          context: .
+          push: false
+          tags: cozycoder:latest
