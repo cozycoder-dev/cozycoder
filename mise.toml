@@ -1,4 +1,5 @@
 [tools]
+"cargo:leptosfmt" = "latest"
 "cargo:trunk" = "latest"
 rust = { version = "stable", targets = "wasm32-unknown-unknown" }
 
