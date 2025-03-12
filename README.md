@@ -12,11 +12,16 @@ Setup local environment:
 
 ```bash
 mise install
-mise run setup
 ```
 
 Run application in development mode:
 
 ```bash
-mise run dev
+mise run dev:app
+```
+
+Run daemon in development mode:
+
+```bash
+mise run dev:daemon
 ```

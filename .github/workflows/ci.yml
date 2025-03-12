@@ -16,6 +16,11 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
+      - name: Install leptosfmt
+        run: cargo install leptosfmt
+      - name: Check Leptos formatting
+        working-directory: crates/app
+        run: leptosfmt --check .
       - name: Check formatting
         run: cargo fmt -- --check
       - name: Linting
@@ -23,8 +28,23 @@ jobs:
       - name: Run tests
         run: cargo test
 
-  build:
-    name: Build ${{ matrix.runner }}
+  build-app:
+    name: Build app
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: Install Trunk
+        run: cargo install trunk
+      - name: Build web app
+        working-directory: crates/app
+        run: trunk build
+
+  build-daemon-docker:
+    name: Build daemon docker ${{ matrix.runner }}
     runs-on: ${{ matrix.runner }}
     strategy:
       matrix:

@@ -1,9 +1,4 @@
-[package]
-name = "cozycoder"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+members = ["crates/daemon", "crates/app"]
 
-[dependencies]
-tokio = { version = "^1.44.0", features = ["full"] }
-axum = "^0.8.1"
-minijinja = { version = "^2.8.0", features = ["loader"] }
+resolver = "2"

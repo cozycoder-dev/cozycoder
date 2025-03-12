@@ -1,15 +1,20 @@
 [tools]
-node = "lts"
-rust = "stable"
+"cargo:leptosfmt" = "latest"
+"cargo:trunk" = "latest"
+rust = { version = "stable", targets = "wasm32-unknown-unknown" }
 
-[tasks.setup]
-run = "npm ci"
+[tasks."dev:app"]
+run = "trunk serve"
+dir = "{{ cwd }}/crates/app"
 
-[tasks.dev]
-run = "mkdir -p public && cp node_modules/htmx.org/dist/htmx.min.js public/ && npx @tailwindcss/cli -i ./assets/styles.css -o ./public/styles.css --watch & cargo run"
+[tasks."dev:daemon"]
+run = "cargo run"
+dir = "{{ cwd }}/crates/daemon"
 
-[tasks."build:assets"]
-run = "mkdir -p public && cp node_modules/htmx.org/dist/htmx.min.js public/ && npx @tailwindcss/cli -i ./assets/styles.css -o ./public/styles.css"
+[tasks."fmt:leptos"]
+run = "leptosfmt ."
+dir = "{{ cwd }}/crates/app"
 
-[tasks."build:release"]
-run = "mise run build:assets && cargo build --release"
+[tasks.fmt]
+depends = ["fmt:leptos"]
+run = "cargo fmt"

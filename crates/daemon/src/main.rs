@@ -1,4 +1,4 @@
-use cozycoder::app;
+use daemon::app;
 use std::net::SocketAddr;
 
 #[tokio::main]
