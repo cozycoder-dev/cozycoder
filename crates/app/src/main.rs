@@ -1,4 +1,5 @@
 mod app;
+mod notebook;
 
 use app::App;
 use leptos::prelude::*;

@@ -4,7 +4,7 @@
 rust = { version = "stable", targets = "wasm32-unknown-unknown" }
 
 [tasks."dev:app"]
-run = "trunk serve"
+run = "trunk serve --open"
 dir = "{{ cwd }}/crates/app"
 
 [tasks."dev:daemon"]
