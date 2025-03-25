@@ -13,13 +13,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install Ubuntu dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
       - name: Install leptosfmt
         run: cargo install leptosfmt
       - name: Check Leptos formatting
-        working-directory: crates/app
+        working-directory: crates/ui
         run: leptosfmt --check .
       - name: Check formatting
         run: cargo fmt -- --check
@@ -28,20 +32,42 @@ jobs:
       - name: Run tests
         run: cargo test
 
-  build-app:
-    name: Build app
-    runs-on: ubuntu-latest
+  build-desktop:
+    name: Build desktop
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: "macos-latest"
+            args: "--target aarch64-apple-darwin"
+          - platform: "macos-latest"
+            args: "--target x86_64-apple-darwin"
+          - platform: "ubuntu-latest"
+            args: ""
+          - platform: "ubuntu-24.04-arm"
+            args: ""
+          - platform: "windows-latest"
+            args: ""
+
+    runs-on: ${{ matrix.platform }}
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install Ubuntu dependencies
+        if: matrix.platform == 'ubuntu-latest' || matrix.platform == 'ubuntu-24.04-arm'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf xdg-utils
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: wasm32-unknown-unknown
-      - name: Install Trunk
-        run: cargo install trunk
-      - name: Build web app
-        working-directory: crates/app
-        run: trunk build
+      - name: Install dependencies
+        run: |
+          cargo install tauri-cli --version "^2.0.0" --locked
+          cargo install trunk
+      - name: Build app
+        run: cargo tauri build
 
   build-daemon-docker:
     name: Build daemon docker ${{ matrix.runner }}
