@@ -4,6 +4,9 @@
 "cargo:trunk" = "latest"
 rust = { version = "stable", targets = "wasm32-unknown-unknown" }
 
+[env]
+_.file = '.env'
+
 [tasks."dev:app"]
 run = "cargo tauri dev"
 
