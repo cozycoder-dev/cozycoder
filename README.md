@@ -15,10 +15,10 @@ Setup local environment:
 mise install
 ```
 
-Run application in development mode:
+Run chat command:
 
 ```bash
-mise run dev
+mise run dev:chat
 ```
 
 Run tests in development:

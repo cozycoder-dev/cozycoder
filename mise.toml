@@ -5,8 +5,8 @@ rust = { version = "stable" }
 [env]
 _.file = '.env'
 
-[tasks."dev"]
-run = "cargo run"
+[tasks."dev:chat"]
+run = "cargo run -- chat"
 
 [tasks."test:watch"]
 run = "bacon test"

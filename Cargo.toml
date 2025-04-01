@@ -1,9 +1,10 @@
 [package]
-name = "tui"
+name = "cozycoder"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+clap = { version = "4.5.34", features = ["derive"] }
 color-eyre = "0.6.3"
 crossterm = "0.28.1"
 ratatui = "0.29.0"
