@@ -1,23 +1,12 @@
 [tools]
-"cargo:leptosfmt" = "latest"
-"cargo:tauri-cli" = "2"
-"cargo:trunk" = "latest"
-rust = { version = "stable", targets = "wasm32-unknown-unknown" }
+"cargo:bacon" = "latest"
+rust = { version = "stable" }
 
 [env]
 _.file = '.env'
 
-[tasks."dev:app"]
-run = "cargo tauri dev"
+[tasks."dev"]
+run = "bacon run"
 
-[tasks."dev:daemon"]
-run = "cargo run"
-dir = "{{ cwd }}/crates/daemon"
-
-[tasks."fmt:leptos"]
-run = "leptosfmt ."
-dir = "{{ cwd }}/crates/ui"
-
-[tasks.fmt]
-depends = ["fmt:leptos"]
-run = "cargo fmt"
+[tasks."test:watch"]
+run = "bacon test"

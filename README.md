@@ -1,10 +1,11 @@
 # Cozy Coder
 
-Your cozy space for coding with AI.
+Vibe coding build for craft coders.
 
 ## Prerequisites
 
-- [mise](https://mise.jdx.dev)
+- Rust stable
+[mise](https://mise.jdx.dev)
 
 ## Usage
 
@@ -17,11 +18,11 @@ mise install
 Run application in development mode:
 
 ```bash
-mise run dev:app
+mise run dev
 ```
 
-Run daemon in development mode:
+Run tests in development:
 
 ```bash
-mise run dev:daemon
+mise test:watch
 ```

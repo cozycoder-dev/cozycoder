@@ -1,4 +1,6 @@
-[workspace]
-members = ["crates/*"]
+[package]
+name = "tui"
+version = "0.1.0"
+edition = "2024"
 
-resolver = "2"
+[dependencies]
