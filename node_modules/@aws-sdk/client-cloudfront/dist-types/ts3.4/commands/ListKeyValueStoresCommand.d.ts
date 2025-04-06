@@ -1,0 +1,51 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFrontClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFrontClient";
+import {
+  ListKeyValueStoresRequest,
+  ListKeyValueStoresResult,
+} from "../models/models_1";
+export { __MetadataBearer };
+export { $Command };
+export interface ListKeyValueStoresCommandInput
+  extends ListKeyValueStoresRequest {}
+export interface ListKeyValueStoresCommandOutput
+  extends ListKeyValueStoresResult,
+    __MetadataBearer {}
+declare const ListKeyValueStoresCommand_base: {
+  new (
+    input: ListKeyValueStoresCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListKeyValueStoresCommandInput,
+    ListKeyValueStoresCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [ListKeyValueStoresCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListKeyValueStoresCommandInput,
+    ListKeyValueStoresCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class ListKeyValueStoresCommand extends ListKeyValueStoresCommand_base {
+  protected static __types: {
+    api: {
+      input: ListKeyValueStoresRequest;
+      output: ListKeyValueStoresResult;
+    };
+    sdk: {
+      input: ListKeyValueStoresCommandInput;
+      output: ListKeyValueStoresCommandOutput;
+    };
+  };
+}

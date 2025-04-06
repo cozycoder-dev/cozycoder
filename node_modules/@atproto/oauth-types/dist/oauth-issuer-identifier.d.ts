@@ -1,0 +1,4 @@
+import { z } from 'zod';
+export declare const oauthIssuerIdentifierSchema: z.ZodEffects<z.ZodEffects<z.ZodString, `http://[::1]${string}` | "http://localhost" | `http://localhost#${string}` | `http://localhost?${string}` | `http://localhost/${string}` | `http://localhost:${string}` | "http://127.0.0.1" | `http://127.0.0.1#${string}` | `http://127.0.0.1?${string}` | `http://127.0.0.1/${string}` | `http://127.0.0.1:${string}` | `https://${string}`, string>, `http://[::1]${string}` | "http://localhost" | `http://localhost#${string}` | `http://localhost?${string}` | `http://localhost/${string}` | `http://localhost:${string}` | "http://127.0.0.1" | `http://127.0.0.1#${string}` | `http://127.0.0.1?${string}` | `http://127.0.0.1/${string}` | `http://127.0.0.1:${string}` | `https://${string}`, string>;
+export type OAuthIssuerIdentifier = z.infer<typeof oauthIssuerIdentifierSchema>;
+//# sourceMappingURL=oauth-issuer-identifier.d.ts.map

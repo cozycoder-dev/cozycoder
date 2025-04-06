@@ -1,0 +1,1 @@
+{"version":3,"file":"004-oauth.d.ts","sourceRoot":"","sources":["../../../../src/account-manager/db/migrations/004-oauth.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAO,MAAM,QAAQ,CAAA;AAEpC,wBAAsB,EAAE,CAAC,EAAE,EAAE,MAAM,CAAC,OAAO,CAAC,GAAG,OAAO,CAAC,IAAI,CAAC,CA+G3D;AAED,wBAAsB,IAAI,CAAC,EAAE,EAAE,MAAM,CAAC,OAAO,CAAC,GAAG,OAAO,CAAC,IAAI,CAAC,CAM7D"}

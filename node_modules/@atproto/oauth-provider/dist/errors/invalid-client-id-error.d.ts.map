@@ -1,0 +1,1 @@
+{"version":3,"file":"invalid-client-id-error.d.ts","sourceRoot":"","sources":["../../src/errors/invalid-client-id-error.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAA;AAE7C;;;;;;GAMG;AACH,qBAAa,oBAAqB,SAAQ,UAAU;gBACtC,iBAAiB,EAAE,MAAM,EAAE,KAAK,CAAC,EAAE,OAAO;IAItD,MAAM,CAAC,IAAI,CACT,KAAK,EAAE,OAAO,EACd,eAAe,SAA8B,GAC5C,oBAAoB;CAaxB"}

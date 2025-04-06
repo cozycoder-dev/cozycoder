@@ -1,0 +1,51 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFrontClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFrontClient";
+import {
+  ListOriginAccessControlsRequest,
+  ListOriginAccessControlsResult,
+} from "../models/models_1";
+export { __MetadataBearer };
+export { $Command };
+export interface ListOriginAccessControlsCommandInput
+  extends ListOriginAccessControlsRequest {}
+export interface ListOriginAccessControlsCommandOutput
+  extends ListOriginAccessControlsResult,
+    __MetadataBearer {}
+declare const ListOriginAccessControlsCommand_base: {
+  new (
+    input: ListOriginAccessControlsCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListOriginAccessControlsCommandInput,
+    ListOriginAccessControlsCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [ListOriginAccessControlsCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListOriginAccessControlsCommandInput,
+    ListOriginAccessControlsCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class ListOriginAccessControlsCommand extends ListOriginAccessControlsCommand_base {
+  protected static __types: {
+    api: {
+      input: ListOriginAccessControlsRequest;
+      output: ListOriginAccessControlsResult;
+    };
+    sdk: {
+      input: ListOriginAccessControlsCommandInput;
+      output: ListOriginAccessControlsCommandOutput;
+    };
+  };
+}

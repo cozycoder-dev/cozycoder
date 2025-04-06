@@ -1,0 +1,51 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFrontClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFrontClient";
+import {
+  ListDistributionsRequest,
+  ListDistributionsResult,
+} from "../models/models_1";
+export { __MetadataBearer };
+export { $Command };
+export interface ListDistributionsCommandInput
+  extends ListDistributionsRequest {}
+export interface ListDistributionsCommandOutput
+  extends ListDistributionsResult,
+    __MetadataBearer {}
+declare const ListDistributionsCommand_base: {
+  new (
+    input: ListDistributionsCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListDistributionsCommandInput,
+    ListDistributionsCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [ListDistributionsCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListDistributionsCommandInput,
+    ListDistributionsCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class ListDistributionsCommand extends ListDistributionsCommand_base {
+  protected static __types: {
+    api: {
+      input: ListDistributionsRequest;
+      output: ListDistributionsResult;
+    };
+    sdk: {
+      input: ListDistributionsCommandInput;
+      output: ListDistributionsCommandOutput;
+    };
+  };
+}

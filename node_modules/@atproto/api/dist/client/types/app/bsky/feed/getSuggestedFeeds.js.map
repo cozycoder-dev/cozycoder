@@ -1,0 +1,1 @@
+{"version":3,"file":"getSuggestedFeeds.js","sourceRoot":"","sources":["../../../../../../src/client/types/app/bsky/feed/getSuggestedFeeds.ts"],"names":[],"mappings":";;AAyCA,gCAEC;AArCD,mDAA4D;AAC5D,2CAIyB;AAGzB,MAAM,QAAQ,GAAG,eAAS,EACxB,QAAQ,GAAG,mBAAS,CAAA;AACtB,MAAM,EAAE,GAAG,iCAAiC,CAAA;AAyB5C,SAAgB,UAAU,CAAC,CAAM;IAC/B,OAAO,CAAC,CAAA;AACV,CAAC"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"invalid-redirect-uri-error.d.ts","sourceRoot":"","sources":["../../src/errors/invalid-redirect-uri-error.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAA;AAE7C;;;;GAIG;AACH,qBAAa,uBAAwB,SAAQ,UAAU;gBACzC,iBAAiB,EAAE,MAAM,EAAE,KAAK,CAAC,EAAE,OAAO;IAItD,MAAM,CAAC,IAAI,CAAC,KAAK,CAAC,EAAE,OAAO,GAAG,uBAAuB;CAItD"}

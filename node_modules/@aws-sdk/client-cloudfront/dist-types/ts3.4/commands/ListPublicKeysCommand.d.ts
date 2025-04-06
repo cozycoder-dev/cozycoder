@@ -1,0 +1,50 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFrontClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFrontClient";
+import {
+  ListPublicKeysRequest,
+  ListPublicKeysResult,
+} from "../models/models_1";
+export { __MetadataBearer };
+export { $Command };
+export interface ListPublicKeysCommandInput extends ListPublicKeysRequest {}
+export interface ListPublicKeysCommandOutput
+  extends ListPublicKeysResult,
+    __MetadataBearer {}
+declare const ListPublicKeysCommand_base: {
+  new (
+    input: ListPublicKeysCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListPublicKeysCommandInput,
+    ListPublicKeysCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [ListPublicKeysCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListPublicKeysCommandInput,
+    ListPublicKeysCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class ListPublicKeysCommand extends ListPublicKeysCommand_base {
+  protected static __types: {
+    api: {
+      input: ListPublicKeysRequest;
+      output: ListPublicKeysResult;
+    };
+    sdk: {
+      input: ListPublicKeysCommandInput;
+      output: ListPublicKeysCommandOutput;
+    };
+  };
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"getTrendingTopics.js","sourceRoot":"","sources":["../../../../../../src/client/types/app/bsky/unspecced/getTrendingTopics.ts"],"names":[],"mappings":";;AA0CA,gCAEC;AAtCD,mDAA4D;AAC5D,2CAIyB;AAGzB,MAAM,QAAQ,GAAG,eAAS,EACxB,QAAQ,GAAG,mBAAS,CAAA;AACtB,MAAM,EAAE,GAAG,sCAAsC,CAAA;AA0BjD,SAAgB,UAAU,CAAC,CAAM;IAC/B,OAAO,CAAC,CAAA;AACV,CAAC"}

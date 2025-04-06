@@ -1,0 +1,1 @@
+{"version":3,"file":"invalid-invite-code-error.d.ts","sourceRoot":"","sources":["../../src/errors/invalid-invite-code-error.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,mBAAmB,EAAE,MAAM,yBAAyB,CAAA;AAE7D,qBAAa,sBAAuB,SAAQ,mBAAmB;gBACjD,OAAO,CAAC,EAAE,MAAM,EAAE,KAAK,CAAC,EAAE,OAAO;CAM9C"}

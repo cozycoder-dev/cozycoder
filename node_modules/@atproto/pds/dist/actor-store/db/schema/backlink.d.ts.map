@@ -1,0 +1,1 @@
+{"version":3,"file":"backlink.d.ts","sourceRoot":"","sources":["../../../../src/actor-store/db/schema/backlink.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,QAAQ;IACvB,GAAG,EAAE,MAAM,CAAA;IACX,IAAI,EAAE,MAAM,CAAA;IACZ,MAAM,EAAE,MAAM,CAAA;CACf;AAED,eAAO,MAAM,SAAS,aAAa,CAAA;AAEnC,MAAM,MAAM,SAAS,GAAG;IAAE,CAAC,SAAS,CAAC,EAAE,QAAQ,CAAA;CAAE,CAAA"}

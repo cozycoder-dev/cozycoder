@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isValidThreadViewPref = exports.isValidSavedFeedsPrefV2 = exports.isValidSavedFeedsPref = exports.isValidPostInteractionSettingsPref = exports.isValidPersonalDetailsPref = exports.isValidMutedWordsPref = exports.isValidLabelersPref = exports.isValidInterestsPref = exports.isValidHiddenPostsPref = exports.isValidFeedViewPref = exports.isValidContentLabelPref = exports.isValidBskyAppStatePref = exports.isValidAdultContentPref = exports.isValidProfile = void 0;
+const index_1 = require("./client/index");
+const util_1 = require("./client/util");
+exports.isValidProfile = (0, util_1.asPredicate)(index_1.AppBskyActorProfile.validateRecord);
+exports.isValidAdultContentPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateAdultContentPref);
+exports.isValidBskyAppStatePref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateBskyAppStatePref);
+exports.isValidContentLabelPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateContentLabelPref);
+exports.isValidFeedViewPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateFeedViewPref);
+exports.isValidHiddenPostsPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateHiddenPostsPref);
+exports.isValidInterestsPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateInterestsPref);
+exports.isValidLabelersPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateLabelersPref);
+exports.isValidMutedWordsPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateMutedWordsPref);
+exports.isValidPersonalDetailsPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validatePersonalDetailsPref);
+exports.isValidPostInteractionSettingsPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validatePostInteractionSettingsPref);
+exports.isValidSavedFeedsPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateSavedFeedsPref);
+exports.isValidSavedFeedsPrefV2 = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateSavedFeedsPrefV2);
+exports.isValidThreadViewPref = (0, util_1.asPredicate)(index_1.AppBskyActorDefs.validateThreadViewPref);
+//# sourceMappingURL=predicate.js.map

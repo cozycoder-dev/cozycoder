@@ -1,0 +1,1 @@
+{"version":3,"file":"migrate.d.ts","sourceRoot":"","sources":["../../src/actor-store/migrate.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,UAAU,EAAE,MAAM,YAAY,CAAA;AAEvC,eAAO,MAAM,iBAAiB,QACvB,UAAU,QACT;IAAE,WAAW,CAAC,EAAE,MAAM,CAAA;CAAE,MAC1B,CAAC,GAAG,EAAE,UAAU,EAAE,GAAG,EAAE,MAAM,KAAK,OAAO,CAAC,MAAM,CAAC,kBA+BtD,CAAA"}

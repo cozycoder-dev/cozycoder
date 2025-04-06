@@ -1,0 +1,1 @@
+{"version":3,"file":"oidc-claims-parameter.d.ts","sourceRoot":"","sources":["../src/oidc-claims-parameter.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,CAAC,EAAE,MAAM,KAAK,CAAA;AAEvB,eAAO,MAAM,yBAAyB,2SAmCpC,CAAA;AAEF,MAAM,MAAM,mBAAmB,GAAG,CAAC,CAAC,KAAK,CAAC,OAAO,yBAAyB,CAAC,CAAA"}

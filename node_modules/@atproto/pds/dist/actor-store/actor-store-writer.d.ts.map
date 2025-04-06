@@ -1,0 +1,1 @@
+{"version":3,"file":"actor-store-writer.d.ts","sourceRoot":"","sources":["../../src/actor-store/actor-store-writer.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,oBAAoB,EAAE,MAAM,0BAA0B,CAAA;AAE/D,qBAAa,gBAAiB,SAAQ,oBAAoB;IAClD,QAAQ,CAAC,CAAC,EACd,EAAE,EAAE,CAAC,EAAE,EAAE,oBAAoB,KAAK,CAAC,GAAG,WAAW,CAAC,CAAC,CAAC,GACnD,OAAO,CAAC,CAAC,CAAC;CAWd"}

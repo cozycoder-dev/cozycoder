@@ -1,0 +1,1 @@
+{"version":3,"file":"schema.d.ts","sourceRoot":"","sources":["../../../src/did-cache/db/schema.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,MAAM;IACrB,GAAG,EAAE,MAAM,CAAA;IACX,GAAG,EAAE,MAAM,CAAA;IACX,SAAS,EAAE,MAAM,CAAA;CAClB;AAED,MAAM,MAAM,cAAc,GAAG;IAC3B,OAAO,EAAE,MAAM,CAAA;CAChB,CAAA"}

@@ -1,0 +1,1 @@
+{"version":3,"file":"checkAccountStatus.d.ts","sourceRoot":"","sources":["../../../../../src/api/com/atproto/server/checkAccountStatus.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,qBAAqB,CAAA;AAChD,OAAO,EAAE,MAAM,EAAE,MAAM,qBAAqB,CAAA;AAG5C,MAAM,CAAC,OAAO,WAAW,MAAM,EAAE,MAAM,EAAE,GAAG,EAAE,UAAU,QAyCvD"}

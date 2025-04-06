@@ -1,0 +1,1 @@
+{"version":3,"file":"repo-block.d.ts","sourceRoot":"","sources":["../../../../src/actor-store/db/schema/repo-block.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,SAAS;IACxB,GAAG,EAAE,MAAM,CAAA;IACX,OAAO,EAAE,MAAM,CAAA;IACf,IAAI,EAAE,MAAM,CAAA;IACZ,OAAO,EAAE,UAAU,CAAA;CACpB;AAED,eAAO,MAAM,SAAS,eAAe,CAAA;AAErC,MAAM,MAAM,SAAS,GAAG;IAAE,CAAC,SAAS,CAAC,EAAE,SAAS,CAAA;CAAE,CAAA"}

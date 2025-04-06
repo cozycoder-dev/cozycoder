@@ -1,0 +1,26 @@
+import { ClientOptions } from 'ws';
+export declare class Subscription<T = unknown> {
+    opts: ClientOptions & {
+        service: string;
+        method: string;
+        maxReconnectSeconds?: number;
+        heartbeatIntervalMs?: number;
+        signal?: AbortSignal;
+        validate: (obj: unknown) => T | undefined;
+        onReconnectError?: (error: unknown, n: number, initialSetup: boolean) => void;
+        getParams?: () => Record<string, unknown> | Promise<Record<string, unknown> | undefined> | undefined;
+    };
+    constructor(opts: ClientOptions & {
+        service: string;
+        method: string;
+        maxReconnectSeconds?: number;
+        heartbeatIntervalMs?: number;
+        signal?: AbortSignal;
+        validate: (obj: unknown) => T | undefined;
+        onReconnectError?: (error: unknown, n: number, initialSetup: boolean) => void;
+        getParams?: () => Record<string, unknown> | Promise<Record<string, unknown> | undefined> | undefined;
+    });
+    [Symbol.asyncIterator](): AsyncGenerator<T>;
+}
+export default Subscription;
+//# sourceMappingURL=subscription.d.ts.map

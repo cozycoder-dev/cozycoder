@@ -1,0 +1,1 @@
+{"version":3,"file":"getSubjectStatus.js","sourceRoot":"","sources":["../../../../../../src/client/types/com/atproto/admin/getSubjectStatus.ts"],"names":[],"mappings":";;AAgDA,gCAEC;AA5CD,mDAA4D;AAC5D,2CAIyB;AAIzB,MAAM,QAAQ,GAAG,eAAS,EACxB,QAAQ,GAAG,mBAAS,CAAA;AACtB,MAAM,EAAE,GAAG,oCAAoC,CAAA;AA+B/C,SAAgB,UAAU,CAAC,CAAM;IAC/B,OAAO,CAAC,CAAA;AACV,CAAC"}

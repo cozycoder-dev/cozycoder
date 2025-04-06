@@ -1,0 +1,51 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFrontClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFrontClient";
+import {
+  ListOriginRequestPoliciesRequest,
+  ListOriginRequestPoliciesResult,
+} from "../models/models_1";
+export { __MetadataBearer };
+export { $Command };
+export interface ListOriginRequestPoliciesCommandInput
+  extends ListOriginRequestPoliciesRequest {}
+export interface ListOriginRequestPoliciesCommandOutput
+  extends ListOriginRequestPoliciesResult,
+    __MetadataBearer {}
+declare const ListOriginRequestPoliciesCommand_base: {
+  new (
+    input: ListOriginRequestPoliciesCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListOriginRequestPoliciesCommandInput,
+    ListOriginRequestPoliciesCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [ListOriginRequestPoliciesCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListOriginRequestPoliciesCommandInput,
+    ListOriginRequestPoliciesCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class ListOriginRequestPoliciesCommand extends ListOriginRequestPoliciesCommand_base {
+  protected static __types: {
+    api: {
+      input: ListOriginRequestPoliciesRequest;
+      output: ListOriginRequestPoliciesResult;
+    };
+    sdk: {
+      input: ListOriginRequestPoliciesCommandInput;
+      output: ListOriginRequestPoliciesCommandOutput;
+    };
+  };
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"getPreferences.d.ts","sourceRoot":"","sources":["../../../../../src/api/app/bsky/actor/getPreferences.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,UAAU,EAAE,MAAM,qBAAqB,CAAA;AAChD,OAAO,EAAE,MAAM,EAAE,MAAM,qBAAqB,CAAA;AAE5C,MAAM,CAAC,OAAO,WAAW,MAAM,EAAE,MAAM,EAAE,GAAG,EAAE,UAAU,QAkBvD"}

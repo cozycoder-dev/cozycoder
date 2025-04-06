@@ -1,0 +1,1 @@
+{"version":3,"file":"user-list.d.ts","sourceRoot":"","sources":["../../../src/moderation/subjects/user-list.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,kBAAkB,EAAE,MAAM,aAAa,CAAA;AAChD,OAAO,EAAE,cAAc,EAAE,yBAAyB,EAAE,MAAM,UAAU,CAAA;AAIpE,wBAAgB,cAAc,CAC5B,OAAO,EAAE,yBAAyB,EAClC,IAAI,EAAE,cAAc,GACnB,kBAAkB,CAiCpB"}

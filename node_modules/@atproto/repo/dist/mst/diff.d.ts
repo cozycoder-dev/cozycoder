@@ -1,0 +1,5 @@
+import { DataDiff } from '../data-diff';
+import { MST } from './mst';
+export declare const nullDiff: (tree: MST) => Promise<DataDiff>;
+export declare const mstDiff: (curr: MST, prev: MST | null) => Promise<DataDiff>;
+//# sourceMappingURL=diff.d.ts.map

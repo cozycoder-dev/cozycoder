@@ -1,0 +1,51 @@
+import { Command as $Command } from "@smithy/smithy-client";
+import { MetadataBearer as __MetadataBearer } from "@smithy/types";
+import {
+  CloudFrontClientResolvedConfig,
+  ServiceInputTypes,
+  ServiceOutputTypes,
+} from "../CloudFrontClient";
+import {
+  ListCachePoliciesRequest,
+  ListCachePoliciesResult,
+} from "../models/models_1";
+export { __MetadataBearer };
+export { $Command };
+export interface ListCachePoliciesCommandInput
+  extends ListCachePoliciesRequest {}
+export interface ListCachePoliciesCommandOutput
+  extends ListCachePoliciesResult,
+    __MetadataBearer {}
+declare const ListCachePoliciesCommand_base: {
+  new (
+    input: ListCachePoliciesCommandInput
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListCachePoliciesCommandInput,
+    ListCachePoliciesCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  new (
+    ...[input]: [] | [ListCachePoliciesCommandInput]
+  ): import("@smithy/smithy-client").CommandImpl<
+    ListCachePoliciesCommandInput,
+    ListCachePoliciesCommandOutput,
+    CloudFrontClientResolvedConfig,
+    ServiceInputTypes,
+    ServiceOutputTypes
+  >;
+  getEndpointParameterInstructions(): import("@smithy/middleware-endpoint").EndpointParameterInstructions;
+};
+export declare class ListCachePoliciesCommand extends ListCachePoliciesCommand_base {
+  protected static __types: {
+    api: {
+      input: ListCachePoliciesRequest;
+      output: ListCachePoliciesResult;
+    };
+    sdk: {
+      input: ListCachePoliciesCommandInput;
+      output: ListCachePoliciesCommandOutput;
+    };
+  };
+}

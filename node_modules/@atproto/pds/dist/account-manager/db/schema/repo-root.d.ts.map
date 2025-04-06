@@ -1,0 +1,1 @@
+{"version":3,"file":"repo-root.d.ts","sourceRoot":"","sources":["../../../../src/account-manager/db/schema/repo-root.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,QAAQ;IACvB,GAAG,EAAE,MAAM,CAAA;IACX,GAAG,EAAE,MAAM,CAAA;IACX,GAAG,EAAE,MAAM,CAAA;IACX,SAAS,EAAE,MAAM,CAAA;CAClB;AAED,eAAO,MAAM,SAAS,cAAc,CAAA;AAEpC,MAAM,MAAM,SAAS,GAAG;IAAE,CAAC,SAAS,CAAC,EAAE,QAAQ,CAAA;CAAE,CAAA"}

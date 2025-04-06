@@ -1,0 +1,1 @@
+{"version":3,"file":"invalid-client-metadata-error.d.ts","sourceRoot":"","sources":["../../src/errors/invalid-client-metadata-error.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAA;AAE7C;;;;;;GAMG;AACH,qBAAa,0BAA2B,SAAQ,UAAU;gBAC5C,iBAAiB,EAAE,MAAM,EAAE,KAAK,CAAC,EAAE,OAAO;IAItD,MAAM,CAAC,IAAI,CAAC,KAAK,EAAE,OAAO,EAAE,OAAO,SAA4B,GAAG,UAAU;CAmD7E"}

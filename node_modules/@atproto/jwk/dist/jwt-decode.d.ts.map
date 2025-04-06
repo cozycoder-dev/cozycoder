@@ -1,0 +1,1 @@
+{"version":3,"file":"jwt-decode.d.ts","sourceRoot":"","sources":["../src/jwt-decode.ts"],"names":[],"mappings":"AACA,OAAO,EACL,SAAS,EACT,UAAU,EAGX,MAAM,UAAU,CAAA;AAGjB,wBAAgB,eAAe,CAAC,GAAG,EAAE,MAAM,GAAG;IAC5C,MAAM,EAAE,SAAS,CAAA;IACjB,OAAO,EAAE,UAAU,CAAA;CACpB,CAcA"}

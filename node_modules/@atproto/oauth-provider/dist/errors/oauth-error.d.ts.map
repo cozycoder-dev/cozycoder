@@ -1,0 +1,1 @@
+{"version":3,"file":"oauth-error.d.ts","sourceRoot":"","sources":["../../src/errors/oauth-error.ts"],"names":[],"mappings":"AAAA,qBAAa,UAAW,SAAQ,KAAK;aAIjB,KAAK,EAAE,MAAM;aACb,iBAAiB,EAAE,MAAM;aACzB,MAAM;IALjB,MAAM,EAAE,OAAO,CAAA;gBAGJ,KAAK,EAAE,MAAM,EACb,iBAAiB,EAAE,MAAM,EACzB,MAAM,SAAM,EAC5B,KAAK,CAAC,EAAE,OAAO;IAUjB,IAAI,UAAU,WAEb;IAED,MAAM;;;;CAMP"}
