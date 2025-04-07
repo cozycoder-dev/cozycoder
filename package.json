@@ -1,0 +1,21 @@
+{
+  "name": "cozycoder",
+  "version": "1.0.0",
+  "description": "Vibe coding build for craft coders.",
+  "main": "index.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozycoder-dev/cozycoder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/cozycoder-dev/cozycoder/issues"
+  },
+  "homepage": "https://cozycoder.dev",
+  "dependencies": {
+    "@atproto/pds": "^0.4.121"
+  }
+}
