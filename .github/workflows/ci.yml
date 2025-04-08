@@ -13,9 +13,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install Ubuntu dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
+      - name: Install leptosfmt
+        run: cargo install leptosfmt
+      - name: Check Leptos formatting
+        working-directory: crates/ui
+        run: leptosfmt --check .
       - name: Check formatting
         run: cargo fmt -- --check
       - name: Linting
@@ -23,41 +32,57 @@ jobs:
       - name: Run tests
         run: cargo test
 
-  build-release:
-    name: Build release
+  build-desktop:
+    name: Build desktop
 
     strategy:
       fail-fast: false
       matrix:
         include:
           - platform: "macos-latest"
-            target: ""
-            args: ""
+            args: "--target aarch64-apple-darwin"
           - platform: "macos-latest"
-            target: "x86_64-apple-darwin"
             args: "--target x86_64-apple-darwin"
           - platform: "ubuntu-latest"
-            target: ""
-            args: ""
-          - platform: "ubuntu-latest"
-            target: "x86_64-unknown-linux-musl"
-            args: "--target x86_64-unknown-linux-musl"
-          - platform: "ubuntu-24.04-arm"
-            target: ""
             args: ""
           - platform: "ubuntu-24.04-arm"
-            target: "aarch64-unknown-linux-musl"
-            args: "--target aarch64-unknown-linux-musl"
+            args: ""
           - platform: "windows-latest"
-            target: ""
             args: ""
 
     runs-on: ${{ matrix.platform }}
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install Ubuntu dependencies
+        if: matrix.platform == 'ubuntu-latest' || matrix.platform == 'ubuntu-24.04-arm'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf xdg-utils
       - uses: dtolnay/rust-toolchain@stable
         with:
-          target: ${{ matrix.target }}
+          targets: wasm32-unknown-unknown
+      - name: Install dependencies
+        run: |
+          cargo install tauri-cli --version "^2.0.0" --locked
+          cargo install trunk
       - name: Build app
-        run: cargo build --release ${{ matrix.args }}
+        run: cargo tauri build
+
+  build-daemon-docker:
+    name: Build daemon docker ${{ matrix.runner }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        runner: [ubuntu-latest, ubuntu-24.04-arm]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: false
+          tags: cozycoder:latest
