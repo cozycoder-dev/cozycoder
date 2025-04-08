@@ -40,17 +40,8 @@ jobs:
       matrix:
         include:
           - platform: "macos-latest"
-            targets: ""
-            args: ""
-          - platform: "macos-latest"
-            targets: ",x86_64-apple-darwin"
-            args: "--target x86_64-apple-darwin"
           - platform: "ubuntu-latest"
-            targets: ""
-            args: ""
           - platform: "windows-latest"
-            targets: ""
-            args: ""
 
     runs-on: ${{ matrix.platform }}
 
@@ -63,10 +54,10 @@ jobs:
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
       - uses: dtolnay/rust-toolchain@stable
         with:
-          targets: wasm32-unknown-unknown${{ matrix.targets }}
+          targets: wasm32-unknown-unknown
       - name: Install dependencies
         run: |
           cargo install tauri-cli --version "^2.0.0" --locked
           cargo install trunk
       - name: Build app
-        run: cargo tauri build ${{ matrix.args }}
+        run: cargo tauri build
