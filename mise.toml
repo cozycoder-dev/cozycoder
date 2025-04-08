@@ -4,12 +4,8 @@
 "cargo:trunk" = "latest"
 rust = { version = "stable", targets = "wasm32-unknown-unknown" }
 
-[tasks."dev:app"]
+[tasks."dev"]
 run = "cargo tauri dev"
-
-[tasks."dev:daemon"]
-run = "cargo run"
-dir = "{{ cwd }}/crates/daemon"
 
 [tasks."fmt:leptos"]
 run = "leptosfmt ."
