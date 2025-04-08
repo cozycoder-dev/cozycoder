@@ -68,21 +68,3 @@ jobs:
           cargo install trunk
       - name: Build app
         run: cargo tauri build
-
-  build-daemon-docker:
-    name: Build daemon docker ${{ matrix.runner }}
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        runner: [ubuntu-latest, ubuntu-24.04-arm]
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Build Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: false
-          tags: cozycoder:latest
