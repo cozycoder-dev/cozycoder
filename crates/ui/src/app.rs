@@ -1,5 +1,5 @@
-use leptos::prelude::*;
 use crate::components::prompt::{Prompt, PromptData};
+use leptos::prelude::*;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -12,7 +12,7 @@ pub fn App() -> impl IntoView {
 
     view! {
         <div class="container mx-auto p-4">
-            <Prompt prompt={test_prompt} />
+            <Prompt prompt=test_prompt />
         </div>
     }
 }
