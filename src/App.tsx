@@ -1,4 +1,4 @@
-import { Prompt, PromptData } from "./components/prompt";
+import { Prompt, PromptData } from "./components/Prompt";
 import "./App.css";
 
 function App() {

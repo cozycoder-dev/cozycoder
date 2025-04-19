@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render, screen, fireEvent } from "@solidjs/testing-library";
-import { Prompt, PromptData } from "./prompt";
+import { Prompt, PromptData } from "./Prompt";
 
 describe("Prompt Component", () => {
   const mockPrompt: PromptData = {
