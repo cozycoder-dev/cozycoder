@@ -1,10 +1,9 @@
 [tools]
-"cargo:tauri-cli" = "2"
 node = "lts"
 rust = "stable"
 
 [tasks."dev"]
-run = "cargo tauri dev"
+run = "npm run tauri dev"
 
 [tasks.fmt]
 run = "cargo fmt"
