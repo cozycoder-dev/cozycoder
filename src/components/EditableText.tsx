@@ -50,7 +50,7 @@ export function EditableText(props: EditableTextProps) {
       fallback={
         <div class="w-full">
           <span
-            class={`cursor-pointer hover:bg-gray-100 p-1 rounded transition-colors ${props.className || ""}`}
+            class={`cursor-pointer hover:bg-gray-100 rounded transition-colors ${props.className || ""}`}
             onClick={startEdit}
           >
             {text()}
