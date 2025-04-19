@@ -7,8 +7,8 @@ on:
     branches: ["main"]
 
 jobs:
-  test:
-    name: Test
+  test-rust:
+    name: Test Rust
     runs-on: ubuntu-latest
 
     steps:
@@ -20,17 +20,27 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
-      - name: Install leptosfmt
-        run: cargo install leptosfmt
-      - name: Check Leptos formatting
-        working-directory: crates/ui
-        run: leptosfmt --check .
       - name: Check formatting
         run: cargo fmt -- --check
       - name: Linting
         run: cargo clippy -- -D warnings
       - name: Run tests
         run: cargo test
+
+  test-ts:
+    name: Test TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "lts/*"
+          cache: "npm"
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
 
   build-desktop:
     name: Build desktop
@@ -53,11 +63,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
       - uses: dtolnay/rust-toolchain@stable
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          targets: wasm32-unknown-unknown
+          node-version: "lts/*"
+          cache: "npm"
       - name: Install dependencies
-        run: |
-          cargo install tauri-cli --version "^2.0.0" --locked
-          cargo install trunk
+        run: npm ci
       - name: Build app
-        run: cargo tauri build
+        run: npm run tauri build
