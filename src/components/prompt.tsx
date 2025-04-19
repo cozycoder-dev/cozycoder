@@ -43,7 +43,7 @@ export function Prompt(props: PromptProps) {
           </div>
         }
       >
-        <div class="w-full flex">
+        <form class="w-full flex" onSubmit={(e) => { e.preventDefault(); save(); }}>
           <input
             type="text"
             class="text-xl font-bold flex-grow p-1 border rounded"
@@ -52,16 +52,16 @@ export function Prompt(props: PromptProps) {
           />
           <div class="flex ml-2">
             <button
+              type="submit"
               class="bg-green-500 text-white px-2 py-1 rounded mr-1"
-              onClick={save}
             >
               Save
             </button>
-            <button class="bg-gray-300 px-2 py-1 rounded" onClick={cancel}>
+            <button type="button" class="bg-gray-300 px-2 py-1 rounded" onClick={cancel}>
               Cancel
             </button>
           </div>
-        </div>
+        </form>
       </Show>
       <div class="text-xs text-gray-500 mt-1 mb-3">{"Modified: "}{props.prompt.updated_at}</div>
       <p class="my-2">{props.prompt.content}</p>
