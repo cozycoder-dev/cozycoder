@@ -1,9 +1,16 @@
 [tools]
-node = "lts"
-rust = "stable"
+"cargo:leptosfmt" = "latest"
+"cargo:tauri-cli" = "2"
+"cargo:trunk" = "latest"
+rust = { version = "stable", targets = "wasm32-unknown-unknown" }
 
 [tasks."dev"]
-run = "npm run tauri dev"
+run = "cargo tauri dev"
+
+[tasks."fmt:leptos"]
+run = "leptosfmt ."
+dir = "{{ cwd }}/crates/ui"
 
 [tasks.fmt]
+depends = ["fmt:leptos"]
 run = "cargo fmt"

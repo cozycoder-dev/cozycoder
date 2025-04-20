@@ -4,12 +4,19 @@
   "version": "0.1.0",
   "identifier": "app.cozycoder",
   "build": {
-    "beforeDevCommand": "npm run dev",
+    "beforeDevCommand": {
+      "script": "trunk serve",
+      "cwd": "../ui"
+    },
     "devUrl": "http://localhost:1420",
-    "beforeBuildCommand": "npm run build",
-    "frontendDist": "../../dist"
+    "beforeBuildCommand": {
+      "script": "trunk build",
+      "cwd": "../ui"
+    },
+    "frontendDist": "../ui/dist"
   },
   "app": {
+    "withGlobalTauri": true,
     "windows": [
       {
         "title": "cozycoder",
