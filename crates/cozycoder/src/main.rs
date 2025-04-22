@@ -1,3 +1,5 @@
+use cozycoder::cli;
+
 fn main() {
-    println!("Hello, world!");
+    cli::run();
 }

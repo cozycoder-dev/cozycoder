@@ -1,9 +1,7 @@
 [tools]
 node = "lts"
+"cargo:bacon" = "latest"
 rust = "stable"
 
 [tasks."dev"]
-run = "npm run tauri dev"
-
-[tasks.fmt]
-run = "cargo fmt"
+run = "bacon run -- --bin cozycoder"
