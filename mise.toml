@@ -1,8 +1,7 @@
 [tools]
 node = "lts"
-"cargo:bacon" = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
 rust = "stable"
 
 [tasks."dev"]
-run = "bacon run -- --bin cozycoder"
+run = "npx @modelcontextprotocol/inspector cargo run -- --bin cozycoder mcp"

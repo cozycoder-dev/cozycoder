@@ -1,5 +1,6 @@
 use cozycoder::cli;
 
-fn main() {
-    cli::run();
+#[tokio::main]
+async fn main() {
+    cli::run().await;
 }
