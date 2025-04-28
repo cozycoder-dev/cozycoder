@@ -1,0 +1,12 @@
+[package]
+name = "cozycoder-mcp-server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+async-trait = "0.1.88"
+rust-mcp-schema = "0.4.0"
+rust-mcp-sdk = "0.2.2"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+thiserror = "1.0.57"
