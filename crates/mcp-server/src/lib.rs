@@ -8,12 +8,16 @@ use rust_mcp_sdk::{
     mcp_server::server_runtime,
 };
 
+pub(crate) mod document;
 pub(crate) mod handler;
 
 #[derive(Debug, thiserror::Error)]
 pub enum McpError {
     #[error("Server error: {0}")]
     ServerError(String),
+
+    #[error("Document error: {0}")]
+    DocumentError(#[from] document::DocumentError),
 }
 
 impl From<McpSdkError> for McpError {
@@ -48,8 +52,14 @@ pub fn server_details() -> InitializeResult {
 }
 
 pub async fn run_mcp_server() -> Result<(), McpError> {
+    // Initialize the document manager
+    let doc_manager = document::DocumentRepo::new().await?;
+
+    // Initialize the transport and server handler
     let transport = StdioTransport::new(TransportOptions::default())?;
-    let handler = CozyCoderServerHandler {};
+    let handler = CozyCoderServerHandler::new(doc_manager);
+
+    // Create and start the server
     let server = server_runtime::create_server(server_details(), transport, handler);
     server.start().await.map_err(McpError::from)
 }

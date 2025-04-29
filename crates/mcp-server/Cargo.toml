@@ -5,8 +5,11 @@ edition = "2024"
 
 [dependencies]
 async-trait = "0.1.88"
+automerge = "0.6.1"
+dirs = "6.0.0"
 rust-mcp-schema = "0.4.0"
 rust-mcp-sdk = "0.2.2"
 serde = { version = "1.0.219", features = ["derive"] }
 serde_json = "1.0.140"
-thiserror = "1.0.57"
+thiserror = "2.0.12"
+tokio = { workspace = true }

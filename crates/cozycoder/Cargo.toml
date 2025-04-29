@@ -6,4 +6,4 @@ edition = "2024"
 [dependencies]
 clap = { version = "4.5.3", features = ["derive"] }
 cozycoder-mcp-server = { path = "../mcp-server" }
-tokio = { version = "1.44.2", features = ["full"] }
+tokio = { workspace = true }
