@@ -1,3 +1,4 @@
+use async_trait::async_trait;
 use rust_mcp_schema::{
     CallToolRequest, CallToolResult, ListToolsRequest, ListToolsResult, RpcError,
     schema_utils::CallToolError,
@@ -7,8 +8,11 @@ use rust_mcp_sdk::{
     macros::{JsonSchema, mcp_tool},
     mcp_server::ServerHandler,
 };
-use async_trait::async_trait;
 use serde::{Deserialize, Serialize};
+use std::sync::Arc;
+use tokio::sync::Mutex;
+
+use crate::document::DocumentRepo;
 
 // STEP 1: Define a rust_mcp_schema::Tool ( we need one with no parameters for this example)
 #[mcp_tool(
@@ -18,9 +22,27 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize, JsonSchema)]
 pub struct SayHelloTool {}
 
-// STEP 2: Implement ServerHandler trait for a custom handler
-// For this example , we only need handle_list_tools_request() and handle_call_tool_request() methods.
-pub struct CozyCoderServerHandler;
+pub struct CozyCoderServerHandler {
+    document_manager: Arc<Mutex<DocumentRepo>>,
+}
+
+impl CozyCoderServerHandler {
+    pub fn new(document_manager: DocumentRepo) -> Self {
+        Self {
+            document_manager: Arc::new(Mutex::new(document_manager)),
+        }
+    }
+
+    async fn save_document(&self) -> Result<(), CallToolError> {
+        let doc_manager = self.document_manager.lock().await;
+        doc_manager.save().await.map_err(|e| {
+            CallToolError::new(std::io::Error::new(
+                std::io::ErrorKind::Other,
+                format!("Failed to save document: {}", e),
+            ))
+        })
+    }
+}
 
 #[async_trait]
 impl ServerHandler for CozyCoderServerHandler {
@@ -44,6 +66,19 @@ impl ServerHandler for CozyCoderServerHandler {
         _runtime: &dyn McpServer,
     ) -> Result<CallToolResult, CallToolError> {
         if request.tool_name() == SayHelloTool::tool_name() {
+            // Example of using the document (in a real implementation, this would
+            // make meaningful changes to the document based on the tool call)
+            {
+                let mut doc_manager = self.document_manager.lock().await;
+                let _doc = doc_manager.get_document_mut();
+                // Here you would make changes to the document based on the tool call
+                // For example:
+                // let _result = _doc.put_object(automerge::ROOT, "last_hello", chrono::Utc::now().to_string());
+            }
+
+            // Save the document after modification
+            self.save_document().await?;
+
             Ok(CallToolResult::text_content(
                 "Hello World!".to_string(),
                 None,
