@@ -1,4 +1,4 @@
-node_modules
-dist
-target/
-.aider*
+*.beam
+*.ez
+/build
+erl_crash.dump
