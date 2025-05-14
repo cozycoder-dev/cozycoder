@@ -9,7 +9,6 @@ gleam_stdlib = ">= 0.44.0 and < 2.0.0"
 gleeunit = ">= 1.0.0 and < 2.0.0"
 
 [javascript]
-typescript_declarations = true
 runtime = "deno"
 
 [javascript.deno]

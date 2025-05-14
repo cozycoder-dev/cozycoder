@@ -1,0 +1,6 @@
+{
+  "tasks": {},
+  "imports": {
+    "@modelcontextprotocol/sdk": "npm:@modelcontextprotocol/sdk@^1.11.2"
+  }
+}

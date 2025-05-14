@@ -3,4 +3,4 @@ deno = "latest"
 gleam = "latest"
 
 [tasks."dev"]
-run = "bacon run -- --bin cozycoder"
+run = "npx @modelcontextprotocol/inspector gleam run"
