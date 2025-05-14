@@ -13,12 +13,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: erlef/setup-beam@v1
         with:
-          components: rustfmt, clippy
+          otp-version: "27"
+          gleam-version: "1.10"
+          rebar3-version: "3"
+      - name: Install dependencies
+        run: gleam deps download
       - name: Check formatting
-        run: cargo fmt -- --check
-      - name: Linting
-        run: cargo clippy -- -D warnings
+        run: gleam format --check src test
       - name: Run tests
-        run: cargo test
+        run: gleam test
