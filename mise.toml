@@ -1,5 +1,4 @@
 [tools]
-node = "lts"
 "cargo:bacon" = "latest"
 rust = "stable"
 

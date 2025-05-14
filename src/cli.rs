@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
 
-use crate::run_mcp_server;
+use crate::mcp;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None, arg_required_else_help = true)]
@@ -19,9 +19,7 @@ pub async fn run() {
 
     if let Some(command) = &cli.command {
         match command {
-            Commands::Mcp => {
-                let _ = run_mcp_server().await;
-            }
+            Commands::Mcp => mcp::server::run().await,
         }
     }
 }
