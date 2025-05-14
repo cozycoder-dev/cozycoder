@@ -4,5 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-clap = { version = "4.5.3", features = ["derive"] }
-tokio = { version = "1.44.2", features = ["full"] }
+clap = { version = "4.5.38", features = ["derive"] }
+rmcp = { version = "0.1.5", features = ["transport-io"] }
+tokio = { version = "1.45.0", features = ["full"] }
