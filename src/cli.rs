@@ -1,5 +1,6 @@
 use clap::{Parser, Subcommand};
-use cozycoder_mcp_server::run_mcp_server;
+
+use crate::run_mcp_server;
 
 #[derive(Parser)]
 #[command(author, version, about, long_about = None, arg_required_else_help = true)]
