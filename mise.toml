@@ -1,6 +1,6 @@
 [tools]
 node = "lts"
-"npm:@anthropic-ai/claude-code" = "latest"
+"cargo:bacon" = "latest"
 rust = "stable"
 
 [tasks."dev"]
