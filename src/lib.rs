@@ -1,3 +1,5 @@
+pub mod cli;
+
 use handler::CozyCoderServerHandler;
 use rust_mcp_schema::{
     Implementation, InitializeResult, LATEST_PROTOCOL_VERSION, ServerCapabilities,

@@ -1,7 +1,8 @@
-[workspace]
-members = ["crates/*"]
+[package]
+name = "cozycoder"
+version = "0.1.0"
+edition = "2024"
 
-resolver = "2"
-
-[workspace.dependencies]
-tokio = { version = "1.44.2", features = ["full"] }
+[dependencies]
+clap = { version = "4.5.38", features = ["derive"] }
+tokio = { version = "1.45.1", features = ["full"] }
