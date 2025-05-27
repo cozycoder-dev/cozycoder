@@ -5,6 +5,11 @@ defmodule CozyCoderWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/mcp", CozyCoderWeb do
+    get "/", MCPController, :sse
+    post "/:id", MCPController, :message
+  end
+
   scope "/api", CozyCoderWeb do
     pipe_through :api
   end
