@@ -1,8 +1,3 @@
 [tools]
-node = "lts"
-"cargo:bacon" = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
-rust = "stable"
-
-[tasks."dev"]
-run = "bacon run -- --bin cozycoder"
+elixir = "1.18"
+erlang = "27"
