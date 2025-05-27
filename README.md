@@ -22,6 +22,12 @@ Run daemon in development mode:
 mix phx.server
 ```
 
+Launch [MCP inspector](https://modelcontextprotocol.io/docs/tools/inspector):
+
+```bash
+mise run mcp
+```
+
 Run tests:
 
 ```bash
