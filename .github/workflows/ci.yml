@@ -6,54 +6,19 @@ on:
   pull_request:
     branches: ["main"]
 
-permissions:
-  contents: read
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
 jobs:
-  build:
+  test-rust:
     name: Test
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Elixir
-        uses: erlef/setup-beam@v1.19.0
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          elixir-version: "1.18"
-          otp-version: "27"
-      - name: Restore dependencies cache
-        uses: actions/cache@v4
-        with:
-          path: deps
-          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
-          restore-keys: ${{ runner.os }}-mix-
-      - name: Install dependencies
-        run: mix deps.get
+          components: rustfmt, clippy
       - name: Check formatting
-        run: mix format --check-formatted
+        run: cargo fmt -- --check
+      - name: Linting
+        run: cargo clippy -- -D warnings
       - name: Run tests
-        run: mix test
-
-  build-image:
-    name: Build container image
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - name: Build
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: false
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+        run: cargo test

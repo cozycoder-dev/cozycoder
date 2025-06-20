@@ -1,6 +1,6 @@
 # Cozy Coder
 
-Tools for your AI coding agent.
+Your cozy space for coding with AI.
 
 ## Prerequisites
 
@@ -12,18 +12,16 @@ Setup local environment:
 
 ```bash
 mise install
-mix ecto.create
-mix setup
+```
+
+Run application in development mode:
+
+```bash
+mise run dev:app
 ```
 
 Run daemon in development mode:
 
 ```bash
-mix phx.server
-```
-
-Run tests:
-
-```bash
-mix test
+mise run dev:daemon
 ```
