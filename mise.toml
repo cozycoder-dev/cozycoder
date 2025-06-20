@@ -1,8 +1,6 @@
 [tools]
 node = "lts"
 "cargo:bacon" = "latest"
-"npm:@anthropic-ai/claude-code" = "latest"
-rust = "stable"
 
-[tasks."dev"]
+[tasks."dev:daemon"]
 run = "bacon run -- --bin cozycoder"
