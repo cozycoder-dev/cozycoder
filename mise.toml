@@ -1,6 +1,3 @@
 [tools]
-node = "lts"
-"cargo:bacon" = "latest"
-
-[tasks."dev:daemon"]
-run = "bacon run -- --bin cozycoder"
+elixir = "1.18"
+erlang = "28"

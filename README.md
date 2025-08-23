@@ -1,6 +1,6 @@
-# Cozy Coder
+# cozycoder
 
-Your cozy space for coding with AI.
+A space to write, share, and collaborate on usage of coding agents.
 
 ## Prerequisites
 
@@ -12,16 +12,17 @@ Setup local environment:
 
 ```bash
 mise install
+mix setup
 ```
 
 Run application in development mode:
 
 ```bash
-mise run dev:app
+mix phx.server
 ```
 
-Run daemon in development mode:
+Run tests locally:
 
 ```bash
-mise run dev:daemon
+mix test
 ```
