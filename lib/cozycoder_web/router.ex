@@ -20,10 +20,11 @@ defmodule CozyCoderWeb.Router do
     get "/", PageController, :home
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CozyCoderWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", CozyCoderWeb do
+    pipe_through :api
+
+    resources "/projects", ProjectController, except: [:new, :edit]
+  end
 
   # Enable LiveDashboard in development
   if Application.compile_env(:cozycoder, :dev_routes) do
