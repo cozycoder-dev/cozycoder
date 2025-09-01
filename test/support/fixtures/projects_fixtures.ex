@@ -11,7 +11,7 @@ defmodule CozyCoder.ProjectsFixtures do
     {:ok, project} =
       attrs
       |> Enum.into(%{
-        git_url: "some git_url",
+        git_url: "https://github.com/example/repo",
         name: "some name"
       })
       |> CozyCoder.Projects.create_project()

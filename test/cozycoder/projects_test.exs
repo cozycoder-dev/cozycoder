@@ -21,11 +21,11 @@ defmodule CozyCoder.ProjectsTest do
     end
 
     test "create_project/1 with valid data creates a project" do
-      valid_attrs = %{name: "some name", git_url: "some git_url"}
+      valid_attrs = %{name: "some name", git_url: "https://github.com/example/repo"}
 
       assert {:ok, %Project{} = project} = Projects.create_project(valid_attrs)
       assert project.name == "some name"
-      assert project.git_url == "some git_url"
+      assert project.git_url == "https://github.com/example/repo"
     end
 
     test "create_project/1 with invalid data returns error changeset" do
@@ -34,11 +34,15 @@ defmodule CozyCoder.ProjectsTest do
 
     test "update_project/2 with valid data updates the project" do
       project = project_fixture()
-      update_attrs = %{name: "some updated name", git_url: "some updated git_url"}
+
+      update_attrs = %{
+        name: "some updated name",
+        git_url: "https://github.com/example/updated-repo"
+      }
 
       assert {:ok, %Project{} = project} = Projects.update_project(project, update_attrs)
       assert project.name == "some updated name"
-      assert project.git_url == "some updated git_url"
+      assert project.git_url == "https://github.com/example/updated-repo"
     end
 
     test "update_project/2 with invalid data returns error changeset" do

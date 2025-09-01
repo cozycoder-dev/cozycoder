@@ -16,5 +16,16 @@ defmodule CozyCoder.Projects.Project do
     project
     |> cast(attrs, [:name, :git_url])
     |> validate_required([:name, :git_url])
+    |> validate_github_url()
+  end
+
+  defp validate_github_url(changeset) do
+    validate_change(changeset, :git_url, fn :git_url, git_url ->
+      if String.starts_with?(git_url, "https://github.com/") do
+        []
+      else
+        [git_url: "must be a GitHub URL (https://github.com/...)"]
+      end
+    end)
   end
 end

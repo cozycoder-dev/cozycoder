@@ -6,13 +6,17 @@ defmodule CozyCoderWeb.ProjectControllerTest do
 
   @create_attrs %{
     name: "some name",
-    git_url: "some git_url"
+    git_url: "https://github.com/cozycoder-dev/codzycoder"
   }
   @update_attrs %{
     name: "some updated name",
-    git_url: "some updated git_url"
+    git_url: "https://github.com/cozycoder-dev/codzycoder.dev"
   }
   @invalid_attrs %{name: nil, git_url: nil}
+  @non_github_attrs %{
+    name: "some name",
+    git_url: "https://gitlab.com/some/repo"
+  }
 
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
@@ -34,13 +38,18 @@ defmodule CozyCoderWeb.ProjectControllerTest do
 
       assert %{
                "id" => ^id,
-               "git_url" => "some git_url",
+               "git_url" => "https://github.com/cozycoder-dev/codzycoder",
                "name" => "some name"
              } = json_response(conn, 200)["data"]
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
       conn = post(conn, ~p"/api/projects", project: @invalid_attrs)
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+
+    test "renders errors when git_url is not a GitHub URL", %{conn: conn} do
+      conn = post(conn, ~p"/api/projects", project: @non_github_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
@@ -56,13 +65,18 @@ defmodule CozyCoderWeb.ProjectControllerTest do
 
       assert %{
                "id" => ^id,
-               "git_url" => "some updated git_url",
+               "git_url" => "https://github.com/cozycoder-dev/codzycoder.dev",
                "name" => "some updated name"
              } = json_response(conn, 200)["data"]
     end
 
     test "renders errors when data is invalid", %{conn: conn, project: project} do
       conn = put(conn, ~p"/api/projects/#{project}", project: @invalid_attrs)
+      assert json_response(conn, 422)["errors"] != %{}
+    end
+
+    test "renders errors when git_url is not a GitHub URL", %{conn: conn, project: project} do
+      conn = put(conn, ~p"/api/projects/#{project}", project: @non_github_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
   end
