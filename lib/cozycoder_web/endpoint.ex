@@ -26,6 +26,11 @@ defmodule CozyCoderWeb.Endpoint do
     gzip: not code_reloading?,
     only: CozyCoderWeb.static_paths()
 
+  # Enable Tidewave MCP server
+  if Code.ensure_loaded?(Tidewave) do
+    plug Tidewave
+  end
+
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do
