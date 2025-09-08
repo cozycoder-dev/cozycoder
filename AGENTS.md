@@ -4,37 +4,46 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a minimal Python project called `mcpkg` configured with modern Python packaging using `pyproject.toml`. The project currently contains a simple "Hello World" script as a starting point.
-
-## Development Setup
-
-- **Python Version**: 3.13 (specified in `.python-version`)
-- **Package Configuration**: Uses `pyproject.toml` for project metadata and tool configuration
-- **Type Checking**: Configured with Pyright (settings in `pyproject.toml`)
+This is a Rust CLI application called `mcpkg` built with the Clap library for command-line argument parsing. The project is configured for the 2024 Rust edition and implements both CLI functionality and an MCP (Model Context Protocol) server using the `rmcp` library.
 
 ## Common Commands
 
-### Running the Application
+### Building and Running
 
 ```bash
-uv run main.py
+cargo build
+cargo run
+cargo run -- init
+cargo run -- mcp
 ```
 
-### Package Management
-
-This project uses standard Python packaging with `pyproject.toml`. `uv` is used as a package manager. New dependencies can be added via:
+### Development Commands
 
 ```bash
-uv add <dependency>
+cargo check      # Fast compilation check
+cargo test        # Run tests
+cargo clippy      # Linting
+cargo fmt         # Code formatting
 ```
 
 ## Architecture
 
-Currently a single-file Python project with:
+The project follows a modular structure:
 
-- `main.py`: Entry point with basic hello world functionality
-- `pyproject.toml`: Project configuration and metadata
-- Standard Python `.gitignore` for build artifacts and virtual environments
+- `src/main.rs`: Entry point with async main that delegates to the CLI module
+- `src/cli.rs`: CLI implementation using Clap derive macros with subcommand architecture
+- `src/mcp.rs`: MCP server implementation using rmcp library with stdio transport
 
-The project is set up for expansion into a proper Python package structure as needed.
+### CLI Structure
+- Main `Cli` struct with optional subcommands using `arg_required_else_help = true`
+- `Commands` enum with `Init` and `Mcp` subcommands
+- Uses Clap 4.x with derive features for argument parsing
 
+### MCP Server Structure
+- `Server` struct implements both `ServerHandler` and prompt routing via `#[prompt_router]`
+- Supports prompts capability with example prompt implementation
+- Supports resources capability with example resource at `instruction://insights`
+- Uses stdio transport for communication
+- Built with rmcp 0.6.3 with transport-io features
+
+The application is designed to work as both a CLI tool and an MCP server, with the MCP functionality providing prompts and resources to MCP clients.
