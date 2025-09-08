@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "mcpkg": {
+      "type": "stdio",
+      "command": "uv",
+      "args": [
+        "run",
+        "mcp",
+        "run",
+        "main.py"
+      ],
+      "env": {}
+    }
+  }
+}
