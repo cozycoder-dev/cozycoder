@@ -1,20 +1,16 @@
 use rmcp::{
-    ErrorData as McpError, RoleServer, ServerHandler, ServiceExt,
-    handler::server::router::prompt::PromptRouter,
+    ErrorData, RoleServer, ServerHandler, ServiceExt,
     model::{
         GetPromptRequestParam, GetPromptResult, Implementation, ListPromptsResult,
-        PaginatedRequestParam, PromptMessage, PromptMessageContent, PromptMessageRole,
-        ReadResourceRequestParam, ReadResourceResult, ResourceContents, ServerCapabilities,
+        PaginatedRequestParam, Prompt, PromptMessage, PromptMessageRole, ServerCapabilities,
         ServerInfo,
     },
-    prompt, prompt_handler, prompt_router,
-    serde_json::json,
     service::RequestContext,
     transport::stdio,
 };
 
 pub(crate) async fn run() {
-    let server: Server = Default::default();
+    let server = Server {};
     let service = server
         .serve(stdio())
         .await
@@ -22,35 +18,8 @@ pub(crate) async fn run() {
     service.waiting().await.expect("MCP server failed");
 }
 
-#[derive(Clone)]
-struct Server {
-    prompt_router: PromptRouter<Server>,
-}
+struct Server {}
 
-impl Default for Server {
-    fn default() -> Self {
-        Server {
-            prompt_router: Self::prompt_router(),
-        }
-    }
-}
-
-#[prompt_router]
-impl Server {
-    #[prompt(name = "example_prompt")]
-    async fn example_prompt(
-        &self,
-        _ctx: RequestContext<RoleServer>,
-    ) -> Result<Vec<PromptMessage>, McpError> {
-        let prompt = "This is an example prompt with your message here: 'Hello'";
-        Ok(vec![PromptMessage {
-            role: PromptMessageRole::User,
-            content: PromptMessageContent::text(prompt),
-        }])
-    }
-}
-
-#[prompt_handler]
 impl ServerHandler for Server {
     fn get_info(&self) -> ServerInfo {
         ServerInfo {
@@ -58,32 +27,31 @@ impl ServerHandler for Server {
                 name: "mcpkg".to_string(),
                 version: "dev".to_string(),
             },
-            capabilities: ServerCapabilities::builder()
-                .enable_prompts()
-                .enable_resources()
-                .build(),
+            capabilities: ServerCapabilities::builder().enable_prompts().build(),
             ..Default::default()
         }
     }
 
-    async fn read_resource(
+    async fn list_prompts(
         &self,
-        ReadResourceRequestParam { uri }: ReadResourceRequestParam,
-        _: RequestContext<RoleServer>,
-    ) -> Result<ReadResourceResult, McpError> {
-        match uri.as_str() {
-            "instruction://insights" => {
-                let memo = "Business Intelligence Memo\n\nAnalysis has revealed 5 key insights ...";
-                Ok(ReadResourceResult {
-                    contents: vec![ResourceContents::text(memo, uri)],
-                })
-            }
-            _ => Err(McpError::resource_not_found(
-                "resource_not_found",
-                Some(json!({
-                    "uri": uri
-                })),
-            )),
-        }
+        _request: Option<PaginatedRequestParam>,
+        _context: RequestContext<RoleServer>,
+    ) -> Result<ListPromptsResult, ErrorData> {
+        let prompt = Prompt::new("hello", Some("Says hello world"), None);
+        Ok(ListPromptsResult::with_all_items(vec![prompt]))
+    }
+
+    async fn get_prompt(
+        &self,
+        _request: GetPromptRequestParam,
+        _context: RequestContext<RoleServer>,
+    ) -> Result<GetPromptResult, ErrorData> {
+        Ok(GetPromptResult {
+            description: None,
+            messages: vec![PromptMessage::new_text(
+                PromptMessageRole::User,
+                "Hello world",
+            )],
+        })
     }
 }
