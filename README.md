@@ -1,3 +1,3 @@
-# mcpkg
+# Cozy Coder
 
-The model context package manager
+Spec Driven Development for Teams.
