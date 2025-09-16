@@ -1,6 +1,6 @@
 [tools]
 node = "lts"
 
-[tasks.dev]
+[tasks."mcp:inspector"]
 description = "Run MCP server and connect via inspector"
 run = "npx @modelcontextprotocol/inspector cargo run -- mcp"
