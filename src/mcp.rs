@@ -1,9 +1,10 @@
 use rmcp::{
     ErrorData, RoleServer, ServerHandler, ServiceExt,
     model::{
-        GetPromptRequestParam, GetPromptResult, Implementation, ListPromptsResult,
-        PaginatedRequestParam, Prompt, PromptMessage, PromptMessageRole, ServerCapabilities,
-        ServerInfo,
+        Extensions, GetPromptRequestParam, GetPromptResult, Implementation, ListPromptsResult,
+        PaginatedRequestParam, Prompt, PromptListChangedNotification,
+        PromptListChangedNotificationMethod, PromptMessage, PromptMessageRole, PromptsCapability,
+        ServerCapabilities, ServerInfo, ServerNotification,
     },
     service::RequestContext,
     transport::stdio,
@@ -27,7 +28,11 @@ impl ServerHandler for Server {
                 name: "mcpkg".to_string(),
                 version: "dev".to_string(),
             },
-            capabilities: ServerCapabilities::builder().enable_prompts().build(),
+            capabilities: ServerCapabilities::builder()
+                .enable_prompts_with(PromptsCapability {
+                    list_changed: Some(true),
+                })
+                .build(),
             ..Default::default()
         }
     }
@@ -35,8 +40,14 @@ impl ServerHandler for Server {
     async fn list_prompts(
         &self,
         _request: Option<PaginatedRequestParam>,
-        _context: RequestContext<RoleServer>,
+        context: RequestContext<RoleServer>,
     ) -> Result<ListPromptsResult, ErrorData> {
+        context
+            .peer
+            .send_notification(PromptListChangedNotification {
+                method: PromptListChangedNotificationMethod,
+                extensions: Extensions::new(),
+            });
         let prompt = Prompt::new("hello", Some("Says hello world"), None);
         Ok(ListPromptsResult::with_all_items(vec![prompt]))
     }
